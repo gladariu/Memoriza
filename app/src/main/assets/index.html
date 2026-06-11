@@ -254,7 +254,7 @@ var mediaRec=null,aChunks=[],aBlob=null,aURL=null,aud=null;
 var isRec=false,isLoop=false,loopCnt=0,recSec=0,recInt=null;
 function getV(){return vIdx==='custom'?custom:VERSES[vIdx];}
 function buildSel(){var s=document.getElementById('vsel');s.innerHTML='';VERSES.forEach(function(v,i){var o=document.createElement('option');o.value=i;o.textContent=v.ref;s.appendChild(o);});if(custom){var o=document.createElement('option');o.value='custom';o.textContent=custom.ref;s.appendChild(o);}}
-function selVerse(){var v=document.getElementById('vsel').value;vIdx=v==='custom'?'custom':parseInt(v);document.getElementById('vref').textContent=getV().ref;document.getElementById('vtxt').textContent=getV().text;resetAll();}
+function selVerse(){var v=document.getElementById('vsel').value;vIdx=v==='custom'?'custom':parseInt(v);document.getElementById('vref').textContent=getV().ref;document.getElementById('vtxt').textContent=getV().text;resetAll();updateRecorderForVerse();}
 function resetAll(){resetRep();buildFrags();buildKws();clearW();buildComp();}
 function pickMethod(m){document.querySelectorAll('.mcard').forEach(function(c){c.classList.remove('sel');});document.getElementById('mc-'+m).classList.add('sel');document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});document.getElementById('p-'+m).classList.add('active');}
 function resetRep(){rCnt=0;hidden=false;document.getElementById('repok').style.display='none';document.getElementById('rvbox').textContent=getV().text;document.getElementById('btnhide').innerHTML='<i class="ti ti-eye-off"></i> Ocultar';updateRepUI();}
@@ -295,6 +295,7 @@ buildSel();buildWave();
 document.getElementById('vref').textContent=VERSES[0].ref;
 document.getElementById('vtxt').textContent=VERSES[0].text;
 resetAll();
+try{updateRecorderForVerse();}catch(e){}
 </script>
 </body>
 </html>
