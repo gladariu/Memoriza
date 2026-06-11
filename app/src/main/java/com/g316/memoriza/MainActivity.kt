@@ -1,110 +1,79 @@
-package com.g316.memoriza
+function buildWave(){var w=document.getElementById('wave');w.innerHTML='';for(var i=0;i<32;i++){var b=document.createElement('div');b.className='wb2';b.style.setProperty('--h',(Math.random()*20+7)+'px');w.appendChild(b);}}
+function animW(on){document.querySelectorAll('.wb2').forEach(function(b){if(on)b.classList.add('an');else{b.classList.remove('an');b.style.height='4px';}});}
 
-import android.Manifest
-import android.annotation.SuppressLint
-import android.content.pm.PackageManager
-import android.media.MediaRecorder
-import android.os.Bundle
-import android.webkit.*
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+var recInt=null,recSec=0,isLoop=false,loopCnt=0;
 
-class MainActivity : AppCompatActivity() {
+function onMicPermissionGranted(){
+  document.getElementById('rstat').textContent='Listo para grabar';
+}
 
-    private lateinit var webView: WebView
-    private val MIC_PERMISSION_CODE = 101
-    private var pendingPermissionRequest: PermissionRequest? = null
+function onNativePlaybackComplete(){
+  if(isLoop){
+    loopCnt++;
+    document.getElementById('lcnt').textContent=loopCnt;
+    AndroidAudio.startPlayback();
+  } else {
+    document.getElementById('btplay').innerHTML='<i class="ti ti-player-play"></i>';
+    document.getElementById('pbadge').classList.remove('show');
+    animW(false);
+  }
+}
 
-    @SuppressLint("SetJavaScriptEnabled")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        webView = findViewById(R.id.webView)
-
-        webView.settings.apply {
-            javaScriptEnabled = true
-            domStorageEnabled = true
-            mediaPlaybackRequiresUserGesture = false
-            allowFileAccess = true
-            allowContentAccess = true
-            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-        }
-
-        webView.webChromeClient = object : WebChromeClient() {
-            override fun onPermissionRequest(request: PermissionRequest) {
-                runOnUiThread {
-                    val hasPermission = ContextCompat.checkSelfPermission(
-                        this@MainActivity,
-                        Manifest.permission.RECORD_AUDIO
-                    ) == PackageManager.PERMISSION_GRANTED
-
-                    if (hasPermission) {
-                        request.grant(request.resources)
-                    } else {
-                        pendingPermissionRequest = request
-                        ActivityCompat.requestPermissions(
-                            this@MainActivity,
-                            arrayOf(Manifest.permission.RECORD_AUDIO),
-                            MIC_PERMISSION_CODE
-                        )
-                    }
-                }
-            }
-        }
-
-        webView.webViewClient = object : WebViewClient() {
-            override fun onReceivedError(
-                view: WebView?,
-                request: WebResourceRequest?,
-                error: WebResourceError?
-            ) {
-                super.onReceivedError(view, request, error)
-            }
-        }
-
-        // Pedir permiso de micrófono al iniciar
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-            != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.RECORD_AUDIO),
-                MIC_PERMISSION_CODE
-            )
-        }
-
-        webView.loadUrl("file:///android_asset/index.html")
+function toggleRec(){
+  var isRec=AndroidAudio.isRecording();
+  if(!isRec){
+    var result=AndroidAudio.startRecording();
+    if(result==='PERMISSION_DENIED'){
+      document.getElementById('rstat').textContent='Permiso denegado. Reinstala la app.';
+      return;
     }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == MIC_PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                pendingPermissionRequest?.grant(pendingPermissionRequest?.resources)
-                // Recargar para que el WebView reconozca el permiso
-                if (pendingPermissionRequest == null) {
-                    webView.reload()
-                }
-            } else {
-                pendingPermissionRequest?.deny()
-                Toast.makeText(
-                    this,
-                    "Permiso de micrófono necesario para grabar",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            pendingPermissionRequest = null
-        }
+    if(result.indexOf('ERROR')===0){
+      document.getElementById('rstat').textContent='Error al grabar';
+      return;
     }
+    recSec=0;
+    recInt=setInterval(function(){
+      recSec++;
+      var m=Math.floor(recSec/60),s=recSec%60;
+      document.getElementById('rtim').textContent=m+':'+String(s).padStart(2,'0');
+    },1000);
+    document.getElementById('btrec').innerHTML='<i class="ti ti-player-stop"></i>';
+    document.getElementById('rstat').textContent='Grabando...';
+    document.getElementById('rstat').classList.add('live');
+    animW(true);
+  } else {
+    AndroidAudio.stopRecording();
+    clearInterval(recInt);
+    document.getElementById('btrec').innerHTML='<i class="ti ti-microphone"></i>';
+    document.getElementById('rstat').textContent='Lista ('+document.getElementById('rtim').textContent+')';
+    document.getElementById('rstat').classList.remove('live');
+    animW(false);
+    var pb=document.getElementById('btplay');
+    pb.className='rbtn ply';
+    pb.disabled=false;
+  }
+}
 
-    override fun onBackPressed() {
-        if (webView.canGoBack()) webView.goBack()
-        else super.onBackPressed()
-    }
+function doPlay(){
+  if(!AndroidAudio.hasRecording()) return;
+  if(!AndroidAudio.isPlaying()){
+    loopCnt=0;
+    document.getElementById('lcnt').textContent=0;
+    AndroidAudio.startPlayback();
+    document.getElementById('btplay').innerHTML='<i class="ti ti-player-pause"></i>';
+    animW(true);
+    if(isLoop) document.getElementById('pbadge').classList.add('show');
+  } else {
+    AndroidAudio.stopPlayback();
+    document.getElementById('btplay').innerHTML='<i class="ti ti-player-play"></i>';
+    animW(false);
+    document.getElementById('pbadge').classList.remove('show');
+  }
+}
+
+function toggleLoop(){
+  isLoop=!isLoop;
+  var t=document.getElementById('ltog');
+  if(isLoop) t.classList.add('on');
+  else { t.classList.remove('on'); document.getElementById('pbadge').classList.remove('show'); }
 }
