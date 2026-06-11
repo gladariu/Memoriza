@@ -487,13 +487,10 @@ function buildLessonsPath(){
   var html='';
   LESSONS.forEach(function(l,i){
     var isDone=done.indexOf(l.id)>=0;
-    var isActive=!isDone&&(i===0||done.indexOf(LESSONS[i-1].id)>=0);
-    var isLocked=!isDone&&!isActive;
-    var cls=isDone?'done':isActive?'active':'locked';
+    var cls=isDone?'done':'active';
     var badge=isDone?'<span class="lbadge lb-green">+'+l.xp+' XP \u2713</span>':
-              isActive?'<span class="lbadge lb-xp">+'+l.xp+' XP</span>':
-              '<span class="lbadge lb-lock"><i class="ti ti-lock"></i></span>';
-    if(l.boss&&isActive)badge='<span class="lbadge lb-red">Final boss</span>';
+              '<span class="lbadge lb-xp">+'+l.xp+' XP</span>';
+    if(l.boss&&!isDone)badge='<span class="lbadge lb-red">Final boss</span>';
     html+='<div class="lesson '+cls+'" onclick="openPanel(\''+l.id+'\')">'+
       '<div class="lesson-icon '+l.cls+'"><i class="ti '+l.icon+'" aria-hidden="true" style="color:#fff;font-size:18px;"></i></div>'+
       '<div class="lesson-info"><div class="lesson-name">'+l.name+'</div><div class="lesson-sub">'+l.sub+'</div></div>'+
