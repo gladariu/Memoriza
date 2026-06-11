@@ -1,4 +1,4 @@
-const CACHE = 'g316-memoriza-v1';
+const CACHE = 'memoriza-v3';
 const ASSETS = [
   '/Memoriza/',
   '/Memoriza/index.html',
@@ -25,6 +25,6 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request))
+    fetch(e.request).catch(() => caches.match(e.request))
   );
 });
