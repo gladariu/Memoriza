@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Memoriza la Palabra</title>
+<meta name="theme-color" content="#111111">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<title>Memoriza la Palabra</title>
 <style>
 :root{--gr:#E8212A;--gb:#1A5BB5;--gg:#2BAC4A;--gy:#F6C012;--gblack:#111;--gdark:#1a1a1a;--gborder:rgba(255,255,255,0.12);--gtxt:#f0f0f0;--gmut:#888;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -16,8 +17,8 @@ body{background:var(--gblack);color:var(--gtxt);font-family:system-ui,-apple-sys
 .htxt p{font-size:11px;color:var(--gmut);margin:1px 0 0;}
 .vcard{margin:.75rem;background:var(--gdark);border-radius:12px;border:1px solid var(--gborder);overflow:hidden;}
 .vtop{padding:.75rem 1rem;border-bottom:1px solid var(--gborder);display:flex;gap:7px;align-items:center;}
-.vtop select{flex:1;min-width:0;background:#2a2a2a;color:#fff;border:1px solid var(--gborder);border-radius:8px;padding:8px 10px;font-size:14px;-webkit-appearance:none;appearance:none;}
-.btnadd{padding:8px 12px;border-radius:8px;background:var(--gr);color:#fff;border:none;cursor:pointer;font-size:13px;white-space:nowrap;display:flex;align-items:center;gap:4px;flex-shrink:0;}
+.vtop select{flex:1;min-width:0;background:#2a2a2a;color:#fff;border:1px solid var(--gborder);border-radius:8px;padding:8px 10px;font-size:14px;-webkit-appearance:none;}
+.btnadd{padding:8px 12px;border-radius:8px;background:var(--gr);color:#fff;border:none;cursor:pointer;font-size:13px;white-space:nowrap;display:flex;align-items:center;gap:4px;flex-shrink:0;touch-action:manipulation;}
 .vbody{padding:1.25rem 1rem;text-align:center;}
 .vref{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--gy);text-transform:uppercase;margin-bottom:.6rem;}
 .vtxt{font-size:15px;line-height:1.85;color:#f0f0f0;font-style:italic;}
@@ -48,7 +49,6 @@ body{background:var(--gblack);color:var(--gtxt);font-family:system-ui,-apple-sys
 .cq{font-size:14px;font-weight:500;color:#f0f0f0;margin-bottom:.6rem;line-height:1.5;}
 .copts{display:flex;flex-direction:column;gap:6px;}
 .copt{padding:11px 12px;border-radius:8px;border:1px solid var(--gborder);background:#111;cursor:pointer;font-size:14px;color:#f0f0f0;line-height:1.4;touch-action:manipulation;}
-.copt:active{opacity:.8;}
 .copt.correct{background:#0d2e14;border-color:var(--gg);color:var(--gg);}
 .copt.wrong{background:#2e0d0d;border-color:var(--gr);color:#ff6b6b;}
 .cfb{margin-top:.6rem;padding:9px 12px;border-radius:8px;font-size:13px;line-height:1.5;}
@@ -75,9 +75,12 @@ body{background:var(--gblack);color:var(--gtxt);font-family:system-ui,-apple-sys
 @keyframes wv{from{height:4px;}to{height:var(--h,24px);}}
 .recrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:.75rem;}
 .rbtn{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;font-size:20px;touch-action:manipulation;}
-.rbtn.rec{background:var(--gr);color:#fff;}.rbtn.ply{background:var(--gg);color:#fff;}.rbtn.dis{background:#2a2a2a;color:#555;pointer-events:none;}
+.rbtn.rec{background:var(--gr);color:#fff;}
+.rbtn.ply{background:var(--gg);color:#fff;}
+.rbtn.dis{background:#2a2a2a;color:#555;pointer-events:none;}
 .rtim{font-size:24px;font-weight:500;color:#fff;}
-.rstat{font-size:12px;color:var(--gmut);}.rstat.live{color:var(--gr);}
+.rstat{font-size:12px;color:var(--gmut);}
+.rstat.live{color:var(--gr);}
 .looprow{display:flex;align-items:center;gap:10px;margin-top:.875rem;padding-top:.875rem;border-top:1px solid var(--gborder);}
 .ltog{width:44px;height:25px;border-radius:99px;background:#333;border:1px solid var(--gborder);cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;touch-action:manipulation;}
 .ltog.on{background:var(--gg);border-color:var(--gg);}
@@ -85,17 +88,14 @@ body{background:var(--gblack);color:var(--gtxt);font-family:system-ui,-apple-sys
 .ltog.on::after{transform:translateX(19px);}
 .pbadge{display:none;align-items:center;gap:5px;background:#0d2e14;padding:4px 10px;border-radius:99px;font-size:12px;color:var(--gg);margin-top:7px;}
 .pbadge.show{display:flex;}
+.lbl{font-size:12px;color:var(--gmut);margin-bottom:.4rem;}
 .recitem{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--gborder);}
 .recitem:last-child{border-bottom:none;}
 .recitem-ref{flex:1;font-size:13px;color:#f0f0f0;font-weight:500;}
 .recitem-btn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;font-size:15px;touch-action:manipulation;flex-shrink:0;}
 .recitem-play{background:var(--gg);color:#fff;}
-.recitem-play:active{opacity:.8;}
 .recitem-del{background:#2a2a2a;color:#ff6b6b;border:1px solid var(--gborder);}
-.recitem-del:active{opacity:.8;}
-.recitem-dur{font-size:11px;color:var(--gmut);min-width:32px;text-align:right;}
 .recempty{font-size:13px;color:var(--gmut);text-align:center;padding:1rem 0;}
-.lbl{font-size:12px;color:var(--gmut);margin-bottom:.4rem;}
 .mwrap{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);align-items:flex-end;justify-content:center;z-index:100;}
 .mwrap.open{display:flex;}
 .mbox{background:var(--gdark);border-radius:16px 16px 0 0;border:1px solid var(--gborder);padding:1.5rem 1.25rem;width:100%;}
@@ -183,7 +183,7 @@ body{background:var(--gblack);color:var(--gtxt);font-family:system-ui,-apple-sys
       <button class="btnp" onclick="revAllF()"><i class="ti ti-eye"></i> Revelar todo</button>
       <button class="btns" onclick="resetF()"><i class="ti ti-refresh"></i> Reiniciar</button>
     </div>
-    <div class="okbox" id="fragok" style="margin-top:.75rem;">&#161;Todos revelados! Ahora rec&#237;talo de memoria.</div>
+    <div class="okbox" id="fragok" style="margin-top:.75rem;">&#161;Todos revelados!</div>
   </div>
 
   <div class="panel" id="p-kw">
@@ -222,12 +222,20 @@ body{background:var(--gblack);color:var(--gtxt);font-family:system-ui,-apple-sys
       <span style="font-size:12px;color:var(--gmut);margin-left:auto;">Repeticiones: <strong id="lcnt">0</strong></span>
     </div>
   </div>
+
+  <div class="recsec" style="margin-top:.75rem;">
+    <div class="rectitle" style="justify-content:space-between;">
+      <span style="display:flex;align-items:center;gap:7px;"><i class="ti ti-list" style="color:var(--gr);"></i> Mis grabaciones</span>
+      <button class="btns" style="padding:5px 10px;font-size:12px;" onclick="refreshRecList()"><i class="ti ti-refresh"></i> Actualizar</button>
+    </div>
+    <div id="reclist"><div class="recempty">No hay grabaciones guardadas.</div></div>
+  </div>
 </div>
 
-<div class="mwrap" id="mwrap" onclick="handleOverlayClick(event)">
+<div class="mwrap" id="mwrap" onclick="if(event.target===this)closeModal()">
   <div class="mbox">
     <h3>Agregar vers&#237;culo personalizado</h3>
-    <input class="minput" id="mref" placeholder="Referencia (ej: G&#233;nesis 1:1)" />
+    <input class="minput" id="mref" placeholder="Referencia (ej: G&#233;nesis 1:1)"/>
     <textarea class="mta" id="mtxt" placeholder="Texto del vers&#237;culo..."></textarea>
     <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:.875rem;">
       <button class="btns" onclick="closeModal()">Cancelar</button>
@@ -239,57 +247,127 @@ body{background:var(--gblack);color:var(--gtxt);font-family:system-ui,-apple-sys
 <script>
 var VERSES=[
   {ref:"Juan 3:16",text:"Porque de tal manera am\u00f3 Dios al mundo, que ha dado a su Hijo unig\u00e9nito, para que todo aquel que en \u00e9l cree, no se pierda, mas tenga vida eterna.",questions:[{q:"\u00bfPor qu\u00e9 Dios dio a su Hijo?",opts:["Por sus obras","Porque am\u00f3 al mundo","Para juzgarlo","Por su fe"],c:1},{q:"\u00bfQu\u00e9 promete a quien cree?",opts:["Riqueza","Salud","No se pierda, tenga vida eterna","Sabidur\u00eda"],c:2}],kw:["am\u00f3","Hijo unig\u00e9nito","cree","no se pierda","vida eterna"]},
-  {ref:"Salmo 23:1",text:"Jehov\u00e1 es mi pastor; nada me faltar\u00e1.",questions:[{q:"\u00bfQui\u00e9n es el pastor?",opts:["David","Mois\u00e9s","Jehov\u00e1","Un \u00e1ngel"],c:2},{q:"\u00bfQu\u00e9 afirma quien tiene a Jehov\u00e1?",opts:["Bendici\u00f3n material","Nada le faltar\u00e1","Larga vida","Sabidur\u00eda"],c:1}],kw:["Jehov\u00e1","pastor","nada","faltar\u00e1"]},
+  {ref:"Salmo 23:1",text:"Jehov\u00e1 es mi pastor; nada me faltar\u00e1.",questions:[{q:"\u00bfQui\u00e9n es el pastor?",opts:["David","Mois\u00e9s","Jehov\u00e1","Un \u00e1ngel"],c:2},{q:"\u00bfQu\u00e9 afirma quien tiene a Jehov\u00e1?",opts:["Bendici\u00f3n","Nada le faltar\u00e1","Larga vida","Sabidur\u00eda"],c:1}],kw:["Jehov\u00e1","pastor","nada","faltar\u00e1"]},
   {ref:"Filipenses 4:13",text:"Todo lo puedo en Cristo que me fortalece.",questions:[{q:"\u00bfEn qui\u00e9n todo lo podemos?",opts:["En nosotros","En Cristo","En la fe","En la iglesia"],c:1},{q:"\u00bfQu\u00e9 hace Cristo?",opts:["Nos salva","Nos gu\u00eda","Nos fortalece","Nos llama"],c:2}],kw:["Todo","Cristo","fortalece"]},
-  {ref:"Proverbios 3:5-6",text:"F\u00edате de Jehov\u00e1 de todo tu coraz\u00f3n, y no te apoyes en tu propia prudencia. Rec\u00f3nocele en todos tus caminos, y \u00e9l enderezar\u00e1 tus veredas.",questions:[{q:"\u00bfEn qu\u00e9 no debemos apoyarnos?",opts:["En los amigos","En nuestra prudencia","En las riquezas","En otros"],c:1},{q:"\u00bfQu\u00e9 har\u00e1 Dios?",opts:["Nos dar\u00e1 riquezas","Nos sanar\u00e1","Enderezar\u00e1 nuestras veredas","Nos dar\u00e1 paz"],c:2}],kw:["F\u00edате","coraz\u00f3n","prudencia","caminos","enderezar\u00e1","veredas"]},
-  {ref:"Josu\u00e9 1:9",text:"Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehov\u00e1 tu Dios estar\u00e1 contigo en dondequiera que fueres.",questions:[{q:"\u00bfQu\u00e9 manda Dios aqu\u00ed?",opts:["Que ores","Que te esfuerces y seas valiente","Que ayunes","Que estudies"],c:1},{q:"\u00bfCu\u00e1l es la promesa?",opts:["Bendici\u00f3n material","Victoria","Jehov\u00e1 estar\u00e1 contigo dondequiera","Larga vida"],c:2}],kw:["esfuerces","valiente","no temas","no desmayes","Jehov\u00e1","dondequiera"]},
-  {ref:"Romanos 8:28",text:"Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien, esto es, a los que conforme a su prop\u00f3sito son llamados.",questions:[{q:"\u00bfA qui\u00e9nes ayudan a bien?",opts:["A los ricos","A los que aman a Dios","A los religiosos","A los sabios"],c:1},{q:"\u00bfC\u00f3mo describe a quienes reciben esto?",opts:["Los que ayunan","Los llamados conforme a su prop\u00f3sito","Los que oran","Los que dan"],c:1}],kw:["aman a Dios","todas las cosas","bien","prop\u00f3sito","llamados"]},
-  {ref:"Isa\u00edas 41:10",text:"No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudar\u00e9, siempre te sustentar\u00e9 con la diestra de mi justicia.",questions:[{q:"\u00bfPor qu\u00e9 no debemos temer?",opts:["Porque somos fuertes","Porque Dios est\u00e1 con nosotros","Porque tenemos fe","Por la oraci\u00f3n"],c:1},{q:"\u00bfCon qu\u00e9 sustenta Dios?",opts:["Con pan del cielo","Con \u00e1ngeles","Con la diestra de su justicia","Con su ley"],c:2}],kw:["No temas","estoy contigo","no desmayes","te esfuerzo","te ayudar\u00e9","te sustentar\u00e9","diestra","justicia"]},
-  {ref:"Mateo 6:33",text:"Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os ser\u00e1n a\u00f1adidas.",questions:[{q:"\u00bfQu\u00e9 debemos buscar primero?",opts:["El \u00e9xito","El reino de Dios y su justicia","La sabidur\u00eda","La paz"],c:1},{q:"\u00bfQu\u00e9 promete?",opts:["Paz mental","Todas estas cosas os ser\u00e1n a\u00f1adidas","Salvaci\u00f3n","Sabidur\u00eda"],c:1}],kw:["buscad","primeramente","reino de Dios","justicia","a\u00f1adidas"]},
+  {ref:"Proverbios 3:5-6",text:"F\u00edате de Jehov\u00e1 de todo tu coraz\u00f3n, y no te apoyes en tu propia prudencia. Rec\u00f3nocele en todos tus caminos, y \u00e9l enderezar\u00e1 tus veredas.",questions:[{q:"\u00bfEn qu\u00e9 no debemos apoyarnos?",opts:["En los amigos","En nuestra prudencia","En las riquezas","En otros"],c:1},{q:"\u00bfQu\u00e9 har\u00e1 Dios?",opts:["Nos dar\u00e1 riquezas","Nos sanar\u00e1","Enderezar\u00e1 nuestras veredas","Nos dar\u00e1 paz"],c:2}],kw:["coraz\u00f3n","prudencia","caminos","enderezar\u00e1","veredas"]},
+  {ref:"Josu\u00e9 1:9",text:"Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehov\u00e1 tu Dios estar\u00e1 contigo en dondequiera que fueres.",questions:[{q:"\u00bfQu\u00e9 manda Dios?",opts:["Que ores","Que te esfuerces y seas valiente","Que ayunes","Que estudies"],c:1},{q:"\u00bfCu\u00e1l es la promesa?",opts:["Bendici\u00f3n","Victoria","Jehov\u00e1 estar\u00e1 contigo dondequiera","Larga vida"],c:2}],kw:["esfuerces","valiente","no temas","no desmayes","dondequiera"]},
+  {ref:"Romanos 8:28",text:"Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien, esto es, a los que conforme a su prop\u00f3sito son llamados.",questions:[{q:"\u00bfA qui\u00e9nes ayudan a bien?",opts:["A los ricos","A los que aman a Dios","A los religiosos","A los sabios"],c:1},{q:"\u00bfC\u00f3mo son llamados?",opts:["Los que ayunan","Conforme a su prop\u00f3sito","Los que oran","Los que dan"],c:1}],kw:["aman a Dios","todas las cosas","bien","prop\u00f3sito","llamados"]},
+  {ref:"Isa\u00edas 41:10",text:"No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudar\u00e9, siempre te sustentar\u00e9 con la diestra de mi justicia.",questions:[{q:"\u00bfPor qu\u00e9 no debemos temer?",opts:["Porque somos fuertes","Porque Dios est\u00e1 con nosotros","Porque tenemos fe","Por la oraci\u00f3n"],c:1},{q:"\u00bfCon qu\u00e9 sustenta Dios?",opts:["Con pan","Con \u00e1ngeles","Con la diestra de su justicia","Con su ley"],c:2}],kw:["No temas","estoy contigo","no desmayes","te ayudar\u00e9","te sustentar\u00e9","diestra"]},
+  {ref:"Mateo 6:33",text:"Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os ser\u00e1n a\u00f1adidas.",questions:[{q:"\u00bfQu\u00e9 debemos buscar primero?",opts:["El \u00e9xito","El reino de Dios y su justicia","La sabidur\u00eda","La paz"],c:1},{q:"\u00bfQu\u00e9 promete?",opts:["Paz","Todas estas cosas os ser\u00e1n a\u00f1adidas","Salvaci\u00f3n","Sabidur\u00eda"],c:1}],kw:["buscad","primeramente","reino de Dios","justicia","a\u00f1adidas"]},
   {ref:"Jerem\u00edas 29:11",text:"Porque yo s\u00e9 los pensamientos que tengo acerca de vosotros, dice Jehov\u00e1, pensamientos de paz, y no de mal, para daros el fin que esper\u00e1is.",questions:[{q:"\u00bfC\u00f3mo son los pensamientos de Dios?",opts:["De juicio","De paz y no de mal","De prueba","De correcci\u00f3n"],c:1},{q:"\u00bfPara qu\u00e9 son?",opts:["Para juzgarnos","Para probarnos","Para darnos el fin que esperamos","Para guiarnos"],c:2}],kw:["pensamientos","paz","no de mal","fin","esper\u00e1is"]},
-  {ref:"Salmo 46:1",text:"Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones.",questions:[{q:"\u00bfQu\u00e9 es Dios para nosotros?",opts:["Nuestro juez","Nuestro amparo y fortaleza","Nuestro maestro","Nuestro creador"],c:1},{q:"\u00bfEn qu\u00e9 momento es auxilio?",opts:["Siempre","En la prosperidad","En las tribulaciones","En la oraci\u00f3n"],c:2}],kw:["amparo","fortaleza","pronto auxilio","tribulaciones"]},
+  {ref:"Salmo 46:1",text:"Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones.",questions:[{q:"\u00bfQu\u00e9 es Dios?",opts:["Nuestro juez","Nuestro amparo y fortaleza","Nuestro maestro","Nuestro creador"],c:1},{q:"\u00bfCu\u00e1ndo es auxilio?",opts:["Siempre","En la prosperidad","En las tribulaciones","En la oraci\u00f3n"],c:2}],kw:["amparo","fortaleza","pronto auxilio","tribulaciones"]},
   {ref:"2 Corintios 5:17",text:"De modo que si alguno est\u00e1 en Cristo, nueva criatura es; las cosas viejas pasaron; he aqu\u00ed todas son hechas nuevas.",questions:[{q:"\u00bfQu\u00e9 es quien est\u00e1 en Cristo?",opts:["Salvo","Nueva criatura","Libre","Bendecido"],c:1},{q:"\u00bfQu\u00e9 pasa con las cosas viejas?",opts:["Se mejoran","Se olvidan","Pasaron","Se transforman"],c:2}],kw:["Cristo","nueva criatura","cosas viejas","pasaron","nuevas"]},
   {ref:"Salmo 119:105",text:"L\u00e1mpara es a mis pies tu palabra, y lumbrera a mi camino.",questions:[{q:"\u00bfA qu\u00e9 compara la Palabra?",opts:["A un arma","A una l\u00e1mpara y lumbrera","A un escudo","A una espada"],c:1},{q:"\u00bfQu\u00e9 ilumina?",opts:["El coraz\u00f3n","El futuro","Los pies y el camino","La mente"],c:2}],kw:["L\u00e1mpara","pies","palabra","lumbrera","camino"]},
   {ref:"Juan 14:6",text:"Jes\u00fas le dijo: Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por m\u00ed.",questions:[{q:"\u00bfQu\u00e9 afirma Jes\u00fas?",opts:["Que es Rey","El camino, la verdad y la vida","El Mes\u00edas","El Salvador"],c:1},{q:"\u00bfC\u00f3mo se llega al Padre?",opts:["Por las obras","Por la oraci\u00f3n","S\u00f3lo por Jes\u00fas","Por los ap\u00f3stoles"],c:2}],kw:["camino","verdad","vida","nadie","Padre","por m\u00ed"]},
-  {ref:"Efesios 2:8-9",text:"Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se glor\u00ede.",questions:[{q:"\u00bfPor qu\u00e9 medio somos salvos?",opts:["Por obras","Por gracia mediante la fe","Por m\u00e9ritos","Por ritos"],c:1},{q:"\u00bfPor qu\u00e9 no por obras?",opts:["Porque no importan","Para que nadie se glor\u00ede","Porque no hay obras buenas","Porque Dios no las acepta"],c:1}],kw:["gracia","salvos","fe","don de Dios","no por obras","nadie se glor\u00ede"]},
-  {ref:"Romanos 10:9",text:"Que si confesares con tu boca que Jes\u00fas es el Se\u00f1or, y creyeres en tu coraz\u00f3n que Dios le levant\u00f3 de los muertos, ser\u00e1s salvo.",questions:[{q:"\u00bfQu\u00e9 debes confesar?",opts:["Tus pecados","Que Jes\u00fas es el Se\u00f1or","Tu fe","Tus obras"],c:1},{q:"\u00bfQu\u00e9 debes creer?",opts:["Que Dios existe","Que la Biblia es verdad","Que Dios levant\u00f3 a Jes\u00fas","Que Jes\u00fas vendr\u00e1"],c:2}],kw:["confesares","boca","Se\u00f1or","creyeres","coraz\u00f3n","levant\u00f3","muertos","salvo"]},
+  {ref:"Efesios 2:8-9",text:"Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se glor\u00ede.",questions:[{q:"\u00bfPor qu\u00e9 medio somos salvos?",opts:["Por obras","Por gracia mediante la fe","Por m\u00e9ritos","Por ritos"],c:1},{q:"\u00bfPor qu\u00e9 no por obras?",opts:["No importan","Para que nadie se glor\u00ede","No hay obras buenas","Dios no las acepta"],c:1}],kw:["gracia","salvos","fe","don de Dios","no por obras"]},
+  {ref:"Romanos 10:9",text:"Que si confesares con tu boca que Jes\u00fas es el Se\u00f1or, y creyeres en tu coraz\u00f3n que Dios le levant\u00f3 de los muertos, ser\u00e1s salvo.",questions:[{q:"\u00bfQu\u00e9 debes confesar?",opts:["Tus pecados","Que Jes\u00fas es el Se\u00f1or","Tu fe","Tus obras"],c:1},{q:"\u00bfQu\u00e9 debes creer?",opts:["Que Dios existe","Que la Biblia es verdad","Que Dios levant\u00f3 a Jes\u00fas","Que Jes\u00fas vendr\u00e1"],c:2}],kw:["confesares","boca","Se\u00f1or","creyeres","coraz\u00f3n","levant\u00f3","salvo"]},
   {ref:"1 Juan 1:9",text:"Si confesamos nuestros pecados, \u00e9l es fiel y justo para perdonar nuestros pecados, y limpiarnos de toda maldad.",questions:[{q:"\u00bfQu\u00e9 debemos confesar?",opts:["Nuestra fe","Nuestros pecados","Nuestras oraciones","Nuestra debilidad"],c:1},{q:"\u00bfDe qu\u00e9 nos limpia?",opts:["Del dolor","De las enfermedades","De toda maldad","Del pecado original"],c:2}],kw:["confesamos","pecados","fiel","justo","perdonar","limpiarnos","maldad"]},
-  {ref:"G\u00e1latas 2:20",text:"Con Cristo estoy juntamente crucificado, y ya no vivo yo, mas vive Cristo en m\u00ed; y lo que ahora vivo en la carne, lo vivo en la fe del Hijo de Dios, el cual me am\u00f3 y se entreg\u00f3 a s\u00ed mismo por m\u00ed.",questions:[{q:"\u00bfQui\u00e9n vive en el creyente?",opts:["El Esp\u00edritu","Cristo","Dios","Un \u00e1ngel"],c:1},{q:"\u00bfC\u00f3mo vive en la carne?",opts:["Por la ley","En la fe del Hijo de Dios","Por la oraci\u00f3n","Por la obediencia"],c:1}],kw:["crucificado","ya no vivo yo","vive Cristo en m\u00ed","fe","Hijo de Dios","me am\u00f3","se entreg\u00f3"]},
-  {ref:"Romanos 12:2",text:"No os conform\u00e9is a este siglo, sino transform\u00e1os por medio de la renovaci\u00f3n de vuestro entendimiento, para que comprob\u00e9is cu\u00e1l sea la buena voluntad de Dios, agradable y perfecta.",questions:[{q:"\u00bfA qu\u00e9 no debemos conformarnos?",opts:["A la iglesia","A los l\u00edderes","A este siglo","A las tradiciones"],c:2},{q:"\u00bfC\u00f3mo nos transformamos?",opts:["Por obras","Por la oraci\u00f3n","Por la renovaci\u00f3n del entendimiento","Por la iglesia"],c:2}],kw:["No os conform\u00e9is","siglo","transform\u00e1os","renovaci\u00f3n","entendimiento","voluntad de Dios","perfecta"]},
+  {ref:"G\u00e1latas 2:20",text:"Con Cristo estoy juntamente crucificado, y ya no vivo yo, mas vive Cristo en m\u00ed; y lo que ahora vivo en la carne, lo vivo en la fe del Hijo de Dios, el cual me am\u00f3 y se entreg\u00f3 a s\u00ed mismo por m\u00ed.",questions:[{q:"\u00bfQui\u00e9n vive en el creyente?",opts:["El Esp\u00edritu","Cristo","Dios","Un \u00e1ngel"],c:1},{q:"\u00bfC\u00f3mo vive en la carne?",opts:["Por la ley","En la fe del Hijo de Dios","Por la oraci\u00f3n","Por la obediencia"],c:1}],kw:["crucificado","ya no vivo yo","vive Cristo en m\u00ed","fe","Hijo de Dios","me am\u00f3"]},
+  {ref:"Romanos 12:2",text:"No os conform\u00e9is a este siglo, sino transform\u00e1os por medio de la renovaci\u00f3n de vuestro entendimiento, para que comprob\u00e9is cu\u00e1l sea la buena voluntad de Dios, agradable y perfecta.",questions:[{q:"\u00bfA qu\u00e9 no debemos conformarnos?",opts:["A la iglesia","A los l\u00edderes","A este siglo","A las tradiciones"],c:2},{q:"\u00bfC\u00f3mo nos transformamos?",opts:["Por obras","Por la oraci\u00f3n","Por la renovaci\u00f3n del entendimiento","Por la iglesia"],c:2}],kw:["No os conform\u00e9is","siglo","transform\u00e1os","renovaci\u00f3n","entendimiento","voluntad de Dios"]},
   {ref:"Hebreos 11:1",text:"Es, pues, la fe la certeza de lo que se espera, la convicci\u00f3n de lo que no se ve.",questions:[{q:"\u00bfC\u00f3mo define la Biblia la fe?",opts:["Creer en Dios","La certeza de lo que se espera","Obedecer la ley","Ir a la iglesia"],c:1},{q:"\u00bfDe qu\u00e9 es convicci\u00f3n?",opts:["De lo pasado","De lo visible","De lo que no se ve","De las Escrituras"],c:2}],kw:["fe","certeza","se espera","convicci\u00f3n","no se ve"]},
   {ref:"Apocalipsis 3:20",text:"He aqu\u00ed, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entrar\u00e9 a \u00e9l, y cenar\u00e9 con \u00e9l, y \u00e9l conmigo.",questions:[{q:"\u00bfQu\u00e9 hace Jes\u00fas?",opts:["Juzgando","Esperando","Llamando a la puerta","Preparando el reino"],c:2},{q:"\u00bfQu\u00e9 promete si le abren?",opts:["Dar\u00e1 riquezas","Entrar\u00e1 y cenar\u00e1 con \u00e9l","Le sanar\u00e1","Le dar\u00e1 paz"],c:1}],kw:["estoy a la puerta","llamo","oye mi voz","abre la puerta","entrar\u00e9","cenar\u00e9"]}
 ];
+
 var vIdx=0,rCnt=0,rGoal=10,hidden=false,frags=[],kws=[],custom=null,qIdx=0;
-var mediaRec=null,aChunks=[],aBlob=null,aURL=null,aud=null;
-var isRec=false,isLoop=false,loopCnt=0,recSec=0,recInt=null;
+var recInt=null,recSec=0,isLoop=false,loopCnt=0,playingRef=null;
+
 function getV(){return vIdx==='custom'?custom:VERSES[vIdx];}
-function buildSel(){var s=document.getElementById('vsel');s.innerHTML='';VERSES.forEach(function(v,i){var o=document.createElement('option');o.value=i;o.textContent=v.ref;s.appendChild(o);});if(custom){var o=document.createElement('option');o.value='custom';o.textContent=custom.ref;s.appendChild(o);}}
-function selVerse(){var v=document.getElementById('vsel').value;vIdx=v==='custom'?'custom':parseInt(v);document.getElementById('vref').textContent=getV().ref;document.getElementById('vtxt').textContent=getV().text;resetAll();updateRecorderForVerse();}
+
+function buildSel(){
+  var s=document.getElementById('vsel');s.innerHTML='';
+  VERSES.forEach(function(v,i){var o=document.createElement('option');o.value=i;o.textContent=v.ref;s.appendChild(o);});
+  if(custom){var o=document.createElement('option');o.value='custom';o.textContent=custom.ref;s.appendChild(o);}
+}
+function selVerse(){
+  var v=document.getElementById('vsel').value;
+  vIdx=v==='custom'?'custom':parseInt(v);
+  document.getElementById('vref').textContent=getV().ref;
+  document.getElementById('vtxt').textContent=getV().text;
+  resetAll();
+  updateRecorderForVerse();
+}
 function resetAll(){resetRep();buildFrags();buildKws();clearW();buildComp();}
-function pickMethod(m){document.querySelectorAll('.mcard').forEach(function(c){c.classList.remove('sel');});document.getElementById('mc-'+m).classList.add('sel');document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});document.getElementById('p-'+m).classList.add('active');}
+function pickMethod(m){
+  document.querySelectorAll('.mcard').forEach(function(c){c.classList.remove('sel');});
+  document.getElementById('mc-'+m).classList.add('sel');
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('p-'+m).classList.add('active');
+}
+
 function resetRep(){rCnt=0;hidden=false;document.getElementById('repok').style.display='none';document.getElementById('rvbox').textContent=getV().text;document.getElementById('btnhide').innerHTML='<i class="ti ti-eye-off"></i> Ocultar';updateRepUI();}
 function updateRepUI(){document.getElementById('rctr').innerHTML=rCnt+' <span>/ '+rGoal+'</span>';document.getElementById('rpbar').style.width=Math.min(100,rCnt/rGoal*100)+'%';}
 function doRep(){if(rCnt<rGoal)rCnt++;updateRepUI();if(rCnt>=rGoal){document.getElementById('repok').style.display='block';document.getElementById('repokn').textContent=rGoal;}}
 function toggleHide(){hidden=!hidden;var el=document.getElementById('rvbox'),btn=document.getElementById('btnhide');if(hidden){el.textContent='';el.style.minHeight='50px';btn.innerHTML='<i class="ti ti-eye"></i> Mostrar';}else{el.textContent=getV().text;btn.innerHTML='<i class="ti ti-eye-off"></i> Ocultar';}}
+
 function buildComp(){qIdx=0;showQ();}
-function showQ(){var v=getV(),qs=v.questions||[],c=document.getElementById('compct');if(!qs.length){c.innerHTML='<p style="color:var(--gmut);font-size:14px;">Sin preguntas disponibles.</p>';return;}if(qIdx>=qs.length){c.innerHTML='<div style="text-align:center;padding:1.25rem;"><div style="font-size:26px;margin-bottom:.5rem;color:var(--gy);">\u2605</div><p style="font-weight:500;">\u00a1Respondiste todas las preguntas!</p><button class="btns" style="margin-top:.75rem;" onclick="buildComp()"><i class="ti ti-refresh"></i> Repetir</button></div>';return;}var q=qs[qIdx];var h='<div style="font-size:11px;color:var(--gmut);margin-bottom:.5rem;">Pregunta '+(qIdx+1)+' de '+qs.length+'</div><div class="cq">'+q.q+'</div><div class="copts">';q.opts.forEach(function(o,i){h+='<div class="copt" id="co-'+i+'" onclick="checkQ('+i+','+q.c+')">'+o+'</div>';});h+='</div><div class="cfb" id="cfb"></div>';c.innerHTML=h;}
-function checkQ(ch,co){document.querySelectorAll('.copt').forEach(function(o){o.style.pointerEvents='none';});var fb=document.getElementById('cfb');if(ch===co){document.getElementById('co-'+ch).classList.add('correct');fb.className='cfb ok';fb.innerHTML='\u2713 \u00a1Correcto! <button class="btns" style="margin-top:6px;" onclick="qIdx++;showQ()">Siguiente \u2192</button>';}else{document.getElementById('co-'+ch).classList.add('wrong');document.getElementById('co-'+co).classList.add('correct');fb.className='cfb no';fb.innerHTML='\u2717 Incorrecto. La respuesta correcta est\u00e1 en verde. <button class="btns" style="margin-top:6px;" onclick="qIdx++;showQ()">Continuar</button>';}}
-function buildFrags(){var words=getV().text.split(' '),sz=Math.max(2,Math.floor(words.length/6));frags=[];for(var i=0;i<words.length;i+=sz)frags.push({w:words.slice(i,i+sz).join(' '),shown:false});renderFrags();}
-function renderFrags(){document.getElementById('fragct').innerHTML=frags.map(function(f,i){return'<div class="frag '+(f.shown?'':'hid')+'" onclick="revF('+i+')">'+(f.shown?f.w:f.w.split(' ').map(function(){return'_';}).join(' '))+'</div>';}).join('');document.getElementById('fragok').style.display=frags.length&&frags.every(function(f){return f.shown;})?'block':'none';}
+function showQ(){
+  var v=getV(),qs=v.questions||[],c=document.getElementById('compct');
+  if(!qs.length){c.innerHTML='<p style="color:var(--gmut);font-size:14px;">Sin preguntas.</p>';return;}
+  if(qIdx>=qs.length){c.innerHTML='<div style="text-align:center;padding:1.25rem;"><div style="font-size:26px;color:var(--gy);">\u2605</div><p style="font-weight:500;margin-top:.5rem;">\u00a1Respondiste todo!</p><button class="btns" style="margin-top:.75rem;" onclick="buildComp()"><i class="ti ti-refresh"></i> Repetir</button></div>';return;}
+  var q=qs[qIdx];
+  var h='<div style="font-size:11px;color:var(--gmut);margin-bottom:.5rem;">Pregunta '+(qIdx+1)+' de '+qs.length+'</div><div class="cq">'+q.q+'</div><div class="copts">';
+  q.opts.forEach(function(o,i){h+='<div class="copt" id="co-'+i+'" onclick="checkQ('+i+','+q.c+')">'+o+'</div>';});
+  h+='</div><div class="cfb" id="cfb"></div>';
+  c.innerHTML=h;
+}
+function checkQ(ch,co){
+  document.querySelectorAll('.copt').forEach(function(o){o.style.pointerEvents='none';});
+  var fb=document.getElementById('cfb');
+  if(ch===co){document.getElementById('co-'+ch).classList.add('correct');fb.className='cfb ok';fb.innerHTML='\u2713 \u00a1Correcto! <button class="btns" style="margin-top:6px;" onclick="qIdx++;showQ()">Siguiente \u2192</button>';}
+  else{document.getElementById('co-'+ch).classList.add('wrong');document.getElementById('co-'+co).classList.add('correct');fb.className='cfb no';fb.innerHTML='\u2717 Incorrecto. <button class="btns" style="margin-top:6px;" onclick="qIdx++;showQ()">Continuar</button>';}
+}
+
+function buildFrags(){
+  var words=getV().text.split(' '),sz=Math.max(2,Math.floor(words.length/6));
+  frags=[];for(var i=0;i<words.length;i+=sz)frags.push({w:words.slice(i,i+sz).join(' '),shown:false});
+  renderFrags();
+}
+function renderFrags(){
+  document.getElementById('fragct').innerHTML=frags.map(function(f,i){
+    var label=f.shown?f.w:f.w.split(' ').map(function(){return'_';}).join(' ');
+    return'<div class="frag '+(f.shown?'':'hid')+'" onclick="revF('+i+')">'+label+'</div>';
+  }).join('');
+  document.getElementById('fragok').style.display=frags.length&&frags.every(function(f){return f.shown;})?'block':'none';
+}
 function revF(i){frags[i].shown=true;renderFrags();}
 function revAllF(){frags.forEach(function(f){f.shown=true;});renderFrags();}
 function resetF(){frags.forEach(function(f){f.shown=false;});renderFrags();}
+
 function buildKws(){kws=(getV().kw||[]).map(function(k){return{w:k,shown:false};});renderKws();}
-function renderKws(){var txt=getV().text;kws.forEach(function(kw,i){var re=new RegExp(kw.w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');txt=txt.replace(re,function(m){return kw.shown?'<span class="kwb sh" onclick="togKw('+i+')">'+m+'</span>':'<span class="kwb" onclick="togKw('+i+')">'+'_'.repeat(m.length)+'</span>';});});document.getElementById('kwct').innerHTML=txt;var h=kws.filter(function(k){return!k.shown;}).length;document.getElementById('kwlbl').textContent=h>0?h+' palabra'+(h>1?'s':'')+' oculta'+(h>1?'s':'')+'. Toca para revelar.':'\u00a1Todas reveladas!';}
+function renderKws(){
+  var txt=getV().text;
+  kws.forEach(function(kw,i){
+    var re=new RegExp(kw.w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
+    txt=txt.replace(re,function(m){return kw.shown?'<span class="kwb sh" onclick="togKw('+i+')">'+m+'</span>':'<span class="kwb" onclick="togKw('+i+')">'+'_'.repeat(m.length)+'</span>';});
+  });
+  document.getElementById('kwct').innerHTML=txt;
+  var h=kws.filter(function(k){return!k.shown;}).length;
+  document.getElementById('kwlbl').textContent=h>0?h+' palabra'+(h>1?'s':'')+' oculta'+(h>1?'s':'')+'. Toca para revelar.':'\u00a1Todas reveladas!';
+}
 function togKw(i){kws[i].shown=!kws[i].shown;renderKws();}
 function revAllKw(){kws.forEach(function(k){k.shown=true;});renderKws();}
 function resetKw(){kws.forEach(function(k){k.shown=false;});renderKws();}
-function checkW(){var inp=document.getElementById('warea').value.trim(),orig=getV().text;if(!inp)return;var iw=inp.replace(/[.,;:!\u00bf\u00a1?]/g,'').toLowerCase().split(/\s+/);var ow=orig.replace(/[.,;:!\u00bf\u00a1?]/g,'').toLowerCase().split(/\s+/);var ok=0,err=0,mis=0,h='';ow.forEach(function(w,i){if(i<iw.length){if(iw[i]===w){h+='<span class="wok">'+w+' </span>';ok++;}else{h+='<span class="werr" title="Escribiste: '+iw[i]+'">'+w+' </span>';err++;}}else{h+='<span class="wmis">'+w+' </span>';mis++;}});var pct=Math.round(ok/ow.length*100);document.getElementById('wres').innerHTML=h+'<div class="srow"><span class="chip chipg">\u2713 '+ok+' correctas</span><span class="chip chipr">\u2717 '+err+' incorrectas</span><span class="chip chipy">\u25cc '+mis+' faltantes</span><span style="font-size:13px;font-weight:500;color:'+(pct>=80?'#2BAC4A':pct>=50?'#F6C012':'#E8212A')+';">'+pct+'%</span></div>';}
+
+function checkW(){
+  var inp=document.getElementById('warea').value.trim(),orig=getV().text;
+  if(!inp)return;
+  var iw=inp.replace(/[.,;:!\u00bf\u00a1?]/g,'').toLowerCase().split(/\s+/);
+  var ow=orig.replace(/[.,;:!\u00bf\u00a1?]/g,'').toLowerCase().split(/\s+/);
+  var ok=0,err=0,mis=0,h='';
+  ow.forEach(function(w,i){if(i<iw.length){if(iw[i]===w){h+='<span class="wok">'+w+' </span>';ok++;}else{h+='<span class="werr" title="Escribiste: '+iw[i]+'">'+w+' </span>';err++;}}else{h+='<span class="wmis">'+w+' </span>';mis++;}});
+  var pct=Math.round(ok/ow.length*100);
+  document.getElementById('wres').innerHTML=h+'<div class="srow"><span class="chip chipg">\u2713 '+ok+' correctas</span><span class="chip chipr">\u2717 '+err+' incorrectas</span><span class="chip chipy">\u25cc '+mis+' faltantes</span><span style="font-size:13px;font-weight:500;color:'+(pct>=80?'#2BAC4A':pct>=50?'#F6C012':'#E8212A')+';">'+pct+'%</span></div>';
+}
 function clearW(){document.getElementById('warea').value='';document.getElementById('wres').innerHTML='';}
-function buildWave(){var w=document.getElementById('wave');w.innerHTML='';for(var i=0;i<32;i++){var b=document.createElement('div');b.className='wb2';b.style.setProperty('--h',(Math.random()*20+7)+'px');w.appendChild(b);}}
+
+function buildWave(){
+  var w=document.getElementById('wave');w.innerHTML='';
+  for(var i=0;i<32;i++){var b=document.createElement('div');b.className='wb2';b.style.setProperty('--h',(Math.random()*20+7)+'px');w.appendChild(b);}
+}
 function animW(on){document.querySelectorAll('.wb2').forEach(function(b){if(on)b.classList.add('an');else{b.classList.remove('an');b.style.height='4px';}});}
-var recInt=null,recSec=0,isLoop=false,loopCnt=0,playingRef=null;
+
 function onMicPermissionGranted(){document.getElementById('rstat').textContent='Listo para grabar';}
+
 function onNativePlaybackComplete(){
   if(playingRef){
     var key=playingRef.replace(/[^a-zA-Z0-9]/g,'_');
@@ -306,16 +384,18 @@ function onNativePlaybackComplete(){
     animW(false);
   }
 }
+
 function updateRecorderForVerse(){
   try{
     var ref=getV().ref;
     var has=AndroidAudio.hasRecordingFor(ref);
     var pb=document.getElementById('btplay');
-    if(has){pb.className='rbtn ply';pb.disabled=false;document.getElementById('rstat').textContent='Grabación: '+ref;}
+    if(has){pb.className='rbtn ply';pb.disabled=false;document.getElementById('rstat').textContent='Grabaci\u00f3n: '+ref;}
     else{pb.className='rbtn dis';pb.disabled=true;document.getElementById('rstat').textContent='Listo para grabar';}
     document.getElementById('rtim').textContent='0:00';
   }catch(e){}
 }
+
 function toggleRec(){
   var ref=getV().ref;
   var isRecNow=AndroidAudio.isRecording();
@@ -323,7 +403,8 @@ function toggleRec(){
     var result=AndroidAudio.startRecording(ref);
     if(result==='PERMISSION_DENIED'){document.getElementById('rstat').textContent='Permiso denegado. Ve a Ajustes.';return;}
     if(result.indexOf('ERROR')===0){document.getElementById('rstat').textContent='Error al grabar';return;}
-    recSec=0;recInt=setInterval(function(){recSec++;var m=Math.floor(recSec/60),s=recSec%60;document.getElementById('rtim').textContent=m+':'+String(s).padStart(2,'0');},1000);
+    recSec=0;
+    recInt=setInterval(function(){recSec++;var m=Math.floor(recSec/60),s=recSec%60;document.getElementById('rtim').textContent=m+':'+String(s).padStart(2,'0');},1000);
     document.getElementById('btrec').innerHTML='<i class="ti ti-player-stop"></i>';
     document.getElementById('rstat').textContent='Grabando: '+ref;
     document.getElementById('rstat').classList.add('live');
@@ -332,13 +413,14 @@ function toggleRec(){
     AndroidAudio.stopRecording();
     clearInterval(recInt);
     document.getElementById('btrec').innerHTML='<i class="ti ti-microphone"></i>';
-    document.getElementById('rstat').textContent='Grabación: '+ref;
+    document.getElementById('rstat').textContent='Grabaci\u00f3n: '+ref;
     document.getElementById('rstat').classList.remove('live');
     animW(false);
     var pb=document.getElementById('btplay');pb.className='rbtn ply';pb.disabled=false;
-    try{refreshRecList();}catch(e){}
+    refreshRecList();
   }
 }
+
 function doPlay(){
   var ref=getV().ref;
   try{if(!AndroidAudio.hasRecordingFor(ref))return;}catch(e){return;}
@@ -351,10 +433,18 @@ function doPlay(){
   }else{
     AndroidAudio.stopPlayback();
     document.getElementById('btplay').innerHTML='<i class="ti ti-player-play"></i>';
-    animW(false);document.getElementById('pbadge').classList.remove('show');
+    animW(false);
+    document.getElementById('pbadge').classList.remove('show');
   }
 }
-function toggleLoop(){isLoop=!isLoop;var t=document.getElementById('ltog');if(isLoop)t.classList.add('on');else{t.classList.remove('on');document.getElementById('pbadge').classList.remove('show');}}
+
+function toggleLoop(){
+  isLoop=!isLoop;
+  var t=document.getElementById('ltog');
+  if(isLoop)t.classList.add('on');
+  else{t.classList.remove('on');document.getElementById('pbadge').classList.remove('show');}
+}
+
 function refreshRecList(){
   try{
     var raw=AndroidAudio.listRecordings();
@@ -363,18 +453,15 @@ function refreshRecList(){
     if(!refs.length){el.innerHTML='<div class="recempty">No hay grabaciones guardadas.</div>';return;}
     el.innerHTML=refs.map(function(ref){
       var key=ref.replace(/[^a-zA-Z0-9]/g,'_');
-      return '<div class="recitem">'+
+      return'<div class="recitem">'+
         '<div class="recitem-ref">'+ref+'</div>'+
-        '<button class="recitem-btn recitem-play" onclick="playListItem(''+ref.replace(/'/g,"\'")+'')" title="Reproducir">'+
-          '<i class="ti ti-player-play" id="pli-'+key+'"></i>'+
-        '</button>'+
-        '<button class="recitem-btn recitem-del" onclick="deleteListItem(''+ref.replace(/'/g,"\'")+'')" title="Borrar">'+
-          '<i class="ti ti-trash"></i>'+
-        '</button>'+
+        '<button class="recitem-btn recitem-play" onclick="playListItem(\''+ref.replace(/'/g,"\\'")+'\')" ><i class="ti ti-player-play" id="pli-'+key+'"></i></button>'+
+        '<button class="recitem-btn recitem-del" onclick="deleteListItem(\''+ref.replace(/'/g,"\\'")+'\')" ><i class="ti ti-trash"></i></button>'+
       '</div>';
     }).join('');
   }catch(e){document.getElementById('reclist').innerHTML='<div class="recempty">Sin grabaciones.</div>';}
 }
+
 function playListItem(ref){
   try{
     if(playingRef&&playingRef!==ref){
@@ -396,15 +483,29 @@ function playListItem(ref){
     }
   }catch(e){}
 }
+
 function deleteListItem(ref){
   try{
-    AndroidAudio.stopPlayback();
+    if(playingRef===ref){AndroidAudio.stopPlayback();playingRef=null;}
     AndroidAudio.deleteRecording(ref);
-    playingRef=null;
     refreshRecList();
   }catch(e){}
 }
-buildSel();buildWave();
+
+function openModal(){document.getElementById('mwrap').classList.add('open');}
+function closeModal(){document.getElementById('mwrap').classList.remove('open');}
+function saveCustom(){
+  var r=document.getElementById('mref').value.trim(),t=document.getElementById('mtxt').value.trim();
+  if(!r||!t)return;
+  custom={ref:r,text:t,questions:[],kw:t.split(' ').filter(function(_,i){return i%4===1;}).slice(0,6)};
+  buildSel();document.getElementById('vsel').value='custom';vIdx='custom';
+  document.getElementById('vref').textContent=custom.ref;
+  document.getElementById('vtxt').textContent=custom.text;
+  resetAll();closeModal();
+}
+
+buildSel();
+buildWave();
 document.getElementById('vref').textContent=VERSES[0].ref;
 document.getElementById('vtxt').textContent=VERSES[0].text;
 resetAll();
