@@ -288,75 +288,11 @@ function checkW(){var inp=document.getElementById('warea').value.trim(),orig=get
 function clearW(){document.getElementById('warea').value='';document.getElementById('wres').innerHTML='';}
 function buildWave(){var w=document.getElementById('wave');w.innerHTML='';for(var i=0;i<32;i++){var b=document.createElement('div');b.className='wb2';b.style.setProperty('--h',(Math.random()*20+7)+'px');w.appendChild(b);}}
 function animW(on){document.querySelectorAll('.wb2').forEach(function(b){if(on)b.classList.add('an');else{b.classList.remove('an');b.style.height='4px';}});}
-var recInt=null,recSec=0,isLoop=false,loopCnt=0;
+var recInt=null,recSec=0,isLoop=false,loopCnt=0,playingRef=null;
 function onMicPermissionGranted(){document.getElementById('rstat').textContent='Listo para grabar';}
-function onNativePlaybackComplete(){if(isLoop){loopCnt++;document.getElementById('lcnt').textContent=loopCnt;AndroidAudio.startPlayback();}else{document.getElementById('btplay').innerHTML='<i class="ti ti-player-play"></i>';document.getElementById('pbadge').classList.remove('show');animW(false);}}
-function toggleRec(){var isRecNow=AndroidAudio.isRecording();if(!isRecNow){var result=AndroidAudio.startRecording();if(result==='PERMISSION_DENIED'){document.getElementById('rstat').textContent='Permiso denegado. Ve a Ajustes y activa el microfono.';return;}if(result.indexOf('ERROR')===0){document.getElementById('rstat').textContent='Error al grabar';return;}recSec=0;recInt=setInterval(function(){recSec++;var m=Math.floor(recSec/60),s=recSec%60;document.getElementById('rtim').textContent=m+':'+String(s).padStart(2,'0');},1000);document.getElementById('btrec').innerHTML='<i class="ti ti-player-stop"></i>';document.getElementById('rstat').textContent='Grabando...';document.getElementById('rstat').classList.add('live');animW(true);}else{AndroidAudio.stopRecording();clearInterval(recInt);document.getElementById('btrec').innerHTML='<i class="ti ti-microphone"></i>';document.getElementById('rstat').textContent='Lista ('+document.getElementById('rtim').textContent+')';document.getElementById('rstat').classList.remove('live');animW(false);var pb=document.getElementById('btplay');pb.className='rbtn ply';pb.disabled=false;}}
-function doPlay(){if(!AndroidAudio.hasRecording())return;if(!AndroidAudio.isPlaying()){loopCnt=0;document.getElementById('lcnt').textContent=0;AndroidAudio.startPlayback();document.getElementById('btplay').innerHTML='<i class="ti ti-player-pause"></i>';animW(true);if(isLoop)document.getElementById('pbadge').classList.add('show');}else{AndroidAudio.stopPlayback();document.getElementById('btplay').innerHTML='<i class="ti ti-player-play"></i>';animW(false);document.getElementById('pbadge').classList.remove('show');}}
-
-
-
-function toggleLoop(){isLoop=!isLoop;var t=document.getElementById('ltog');if(isLoop)t.classList.add('on');else{t.classList.remove('on');document.getElementById('pbadge').classList.remove('show');}}
-function openModal(){document.getElementById('mwrap').classList.add('open');}
-function closeModal(){document.getElementById('mwrap').classList.remove('open');}
-function handleOverlayClick(e){if(e.target===document.getElementById('mwrap'))closeModal();}
-function saveCustom(){var r=document.getElementById('mref').value.trim(),t=document.getElementById('mtxt').value.trim();if(!r||!t)return;custom={ref:r,text:t,questions:[],kw:t.split(' ').filter(function(_,i){return i%4===1;}).slice(0,6)};buildSel();document.getElementById('vsel').value='custom';vIdx='custom';document.getElementById('vref').textContent=custom.ref;document.getElementById('vtxt').textContent=custom.text;resetAll();closeModal();}
-
-var playingRef=null;
-function refreshRecList(){
-  try{
-    var raw=AndroidAudio.listRecordings();
-    var refs=raw?raw.split('|').filter(function(r){return r.trim()!=='';}):[];
-    var el=document.getElementById('reclist');
-    if(!refs.length){el.innerHTML='<div class="recempty">No hay grabaciones guardadas.</div>';return;}
-    el.innerHTML=refs.map(function(ref){
-      return '<div class="recitem" id="ri-'+btoa(unescape(encodeURIComponent(ref)))+'">'+
-        '<div class="recitem-ref">'+ref+'</div>'+
-        '<button class="recitem-btn recitem-play" onclick="playListItem(''+ref.replace(/'/g,"\'")+'')" title="Reproducir">'+
-          '<i class="ti ti-player-play" id="pli-'+btoa(unescape(encodeURIComponent(ref)))+'"></i>'+
-        '</button>'+
-        '<button class="recitem-btn recitem-del" onclick="deleteListItem(''+ref.replace(/'/g,"\'")+'')" title="Borrar">'+
-          '<i class="ti ti-trash"></i>'+
-        '</button>'+
-      '</div>';
-    }).join('');
-  }catch(e){document.getElementById('reclist').innerHTML='<div class="recempty">Instala la app para ver grabaciones.</div>';}
-}
-function playListItem(ref){
-  try{
-    if(playingRef&&playingRef!==ref){
-      AndroidAudio.stopPlayback();
-      var oldKey=btoa(unescape(encodeURIComponent(playingRef)));
-      var oldIcon=document.getElementById('pli-'+oldKey);
-      if(oldIcon)oldIcon.className='ti ti-player-play';
-      playingRef=null;
-    }
-    var key=btoa(unescape(encodeURIComponent(ref)));
-    var icon=document.getElementById('pli-'+key);
-    if(AndroidAudio.isPlaying()&&playingRef===ref){
-      AndroidAudio.stopPlayback();
-      if(icon)icon.className='ti ti-player-play';
-      playingRef=null;
-    }else{
-      var result=AndroidAudio.startPlayback(ref);
-      if(result==='OK'){
-        if(icon)icon.className='ti ti-player-pause';
-        playingRef=ref;
-      }
-    }
-  }catch(e){}
-}
-function deleteListItem(ref){
-  try{
-    AndroidAudio.stopPlayback();
-    AndroidAudio.deleteRecording(ref);
-    playingRef=null;
-    refreshRecList();
-  }catch(e){}
-}
 function onNativePlaybackComplete(){
   if(playingRef){
-    var key=btoa(unescape(encodeURIComponent(playingRef)));
+    var key=playingRef.replace(/[^a-zA-Z0-9]/g,'_');
     var icon=document.getElementById('pli-'+key);
     if(icon)icon.className='ti ti-player-play';
     playingRef=null;
@@ -369,6 +305,104 @@ function onNativePlaybackComplete(){
     document.getElementById('pbadge').classList.remove('show');
     animW(false);
   }
+}
+function updateRecorderForVerse(){
+  try{
+    var ref=getV().ref;
+    var has=AndroidAudio.hasRecordingFor(ref);
+    var pb=document.getElementById('btplay');
+    if(has){pb.className='rbtn ply';pb.disabled=false;document.getElementById('rstat').textContent='Grabación: '+ref;}
+    else{pb.className='rbtn dis';pb.disabled=true;document.getElementById('rstat').textContent='Listo para grabar';}
+    document.getElementById('rtim').textContent='0:00';
+  }catch(e){}
+}
+function toggleRec(){
+  var ref=getV().ref;
+  var isRecNow=AndroidAudio.isRecording();
+  if(!isRecNow){
+    var result=AndroidAudio.startRecording(ref);
+    if(result==='PERMISSION_DENIED'){document.getElementById('rstat').textContent='Permiso denegado. Ve a Ajustes.';return;}
+    if(result.indexOf('ERROR')===0){document.getElementById('rstat').textContent='Error al grabar';return;}
+    recSec=0;recInt=setInterval(function(){recSec++;var m=Math.floor(recSec/60),s=recSec%60;document.getElementById('rtim').textContent=m+':'+String(s).padStart(2,'0');},1000);
+    document.getElementById('btrec').innerHTML='<i class="ti ti-player-stop"></i>';
+    document.getElementById('rstat').textContent='Grabando: '+ref;
+    document.getElementById('rstat').classList.add('live');
+    animW(true);
+  }else{
+    AndroidAudio.stopRecording();
+    clearInterval(recInt);
+    document.getElementById('btrec').innerHTML='<i class="ti ti-microphone"></i>';
+    document.getElementById('rstat').textContent='Grabación: '+ref;
+    document.getElementById('rstat').classList.remove('live');
+    animW(false);
+    var pb=document.getElementById('btplay');pb.className='rbtn ply';pb.disabled=false;
+    try{refreshRecList();}catch(e){}
+  }
+}
+function doPlay(){
+  var ref=getV().ref;
+  try{if(!AndroidAudio.hasRecordingFor(ref))return;}catch(e){return;}
+  if(!AndroidAudio.isPlaying()){
+    loopCnt=0;document.getElementById('lcnt').textContent=0;
+    AndroidAudio.startPlayback(ref);
+    document.getElementById('btplay').innerHTML='<i class="ti ti-player-pause"></i>';
+    animW(true);
+    if(isLoop)document.getElementById('pbadge').classList.add('show');
+  }else{
+    AndroidAudio.stopPlayback();
+    document.getElementById('btplay').innerHTML='<i class="ti ti-player-play"></i>';
+    animW(false);document.getElementById('pbadge').classList.remove('show');
+  }
+}
+function toggleLoop(){isLoop=!isLoop;var t=document.getElementById('ltog');if(isLoop)t.classList.add('on');else{t.classList.remove('on');document.getElementById('pbadge').classList.remove('show');}}
+function refreshRecList(){
+  try{
+    var raw=AndroidAudio.listRecordings();
+    var refs=raw?raw.split('|').filter(function(r){return r.trim()!=='';}) :[];
+    var el=document.getElementById('reclist');
+    if(!refs.length){el.innerHTML='<div class="recempty">No hay grabaciones guardadas.</div>';return;}
+    el.innerHTML=refs.map(function(ref){
+      var key=ref.replace(/[^a-zA-Z0-9]/g,'_');
+      return '<div class="recitem">'+
+        '<div class="recitem-ref">'+ref+'</div>'+
+        '<button class="recitem-btn recitem-play" onclick="playListItem(''+ref.replace(/'/g,"\'")+'')" title="Reproducir">'+
+          '<i class="ti ti-player-play" id="pli-'+key+'"></i>'+
+        '</button>'+
+        '<button class="recitem-btn recitem-del" onclick="deleteListItem(''+ref.replace(/'/g,"\'")+'')" title="Borrar">'+
+          '<i class="ti ti-trash"></i>'+
+        '</button>'+
+      '</div>';
+    }).join('');
+  }catch(e){document.getElementById('reclist').innerHTML='<div class="recempty">Sin grabaciones.</div>';}
+}
+function playListItem(ref){
+  try{
+    if(playingRef&&playingRef!==ref){
+      AndroidAudio.stopPlayback();
+      var oldKey=playingRef.replace(/[^a-zA-Z0-9]/g,'_');
+      var oldIcon=document.getElementById('pli-'+oldKey);
+      if(oldIcon)oldIcon.className='ti ti-player-play';
+      playingRef=null;
+    }
+    var key=ref.replace(/[^a-zA-Z0-9]/g,'_');
+    var icon=document.getElementById('pli-'+key);
+    if(AndroidAudio.isPlaying()&&playingRef===ref){
+      AndroidAudio.stopPlayback();
+      if(icon)icon.className='ti ti-player-play';
+      playingRef=null;
+    }else{
+      var result=AndroidAudio.startPlayback(ref);
+      if(result==='OK'){if(icon)icon.className='ti ti-player-pause';playingRef=ref;}
+    }
+  }catch(e){}
+}
+function deleteListItem(ref){
+  try{
+    AndroidAudio.stopPlayback();
+    AndroidAudio.deleteRecording(ref);
+    playingRef=null;
+    refreshRecList();
+  }catch(e){}
 }
 buildSel();buildWave();
 document.getElementById('vref').textContent=VERSES[0].ref;
