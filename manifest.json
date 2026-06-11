@@ -1,0 +1,25 @@
+{
+  "name": "Memoriza la Palabra",
+  "short_name": "G3:16",
+  "description": "Memoriza versículos bíblicos - Reina Valera 1960",
+  "start_url": "/Memoriza/",
+  "scope": "/Memoriza/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
