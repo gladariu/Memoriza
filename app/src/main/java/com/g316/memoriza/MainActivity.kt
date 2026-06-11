@@ -1,4 +1,4 @@
-﻿package com.g316.memoriza
+package com.g316.memoriza
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
 
     private var mediaRecorder: MediaRecorder? = null
     private var mediaPlayer: MediaPlayer? = null
-    private var audioFile: File? = null
     private var isRec = false
+    private var currentVerseRef = ""
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity() {
         webView.webChromeClient = WebChromeClient()
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-            != PackageManager.PERMISSION_GRANTED) {
+            != PackageManager.PERMISSION_GRANTED
+        ) {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.RECORD_AUDIO),
@@ -54,32 +55,47 @@ class MainActivity : AppCompatActivity() {
         webView.loadUrl("file:///android_asset/index.html")
     }
 
+    private fun safeFileName(ref: String): String =
+        ref.replace(Regex("[^a-zA-Z0-9\\-_]"), "_")
+
+    private fun fileForRef(ref: String): File =
+        File(filesDir, "grabacion_${safeFileName(ref)}.mp4")
+
     inner class AudioBridge {
 
         @JavascriptInterface
-        fun startRecording(): String {
+        fun startRecording(verseRef: String): String {
             if (ContextCompat.checkSelfPermission(
                     this@MainActivity, Manifest.permission.RECORD_AUDIO
-                ) != PackageManager.PERMISSION_GRANTED) {
-                return "PERMISSION_DENIED"
-            }
+                ) != PackageManager.PERMISSION_GRANTED
+            ) return "PERMISSION_DENIED"
+
             return try {
-                stopRecording()
-                audioFile = File(cacheDir, "recording.mp4")
+                // Stop any previous recording
+                if (isRec) {
+                    mediaRecorder?.stop()
+                    mediaRecorder?.release()
+                    mediaRecorder = null
+                    isRec = false
+                }
+                currentVerseRef = verseRef
+                val file = fileForRef(verseRef)
+
+                @Suppress("DEPRECATION")
                 mediaRecorder = MediaRecorder().apply {
                     setAudioSource(MediaRecorder.AudioSource.MIC)
                     setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
                     setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
                     setAudioSamplingRate(44100)
                     setAudioEncodingBitRate(128000)
-                    setOutputFile(audioFile!!.absolutePath)
+                    setOutputFile(file.absolutePath)
                     prepare()
                     start()
                 }
                 isRec = true
                 "OK"
             } catch (e: Exception) {
-                "ERROR: ${e.message}"
+                "ERROR:${e.message}"
             }
         }
 
@@ -94,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 "OK"
             } catch (e: Exception) {
-                "ERROR: ${e.message}"
+                "ERROR:${e.message}"
             }
         }
 
@@ -102,16 +118,19 @@ class MainActivity : AppCompatActivity() {
         fun isRecording(): Boolean = isRec
 
         @JavascriptInterface
-        fun hasRecording(): Boolean =
-            audioFile?.exists() == true && (audioFile?.length() ?: 0) > 0
+        fun hasRecordingFor(verseRef: String): Boolean {
+            val f = fileForRef(verseRef)
+            return f.exists() && f.length() > 0
+        }
 
         @JavascriptInterface
-        fun startPlayback(): String {
+        fun startPlayback(verseRef: String): String {
             return try {
-                if (audioFile == null || !audioFile!!.exists()) return "NO_FILE"
+                val file = fileForRef(verseRef)
+                if (!file.exists() || file.length() == 0L) return "NO_FILE"
                 mediaPlayer?.release()
                 mediaPlayer = MediaPlayer().apply {
-                    setDataSource(audioFile!!.absolutePath)
+                    setDataSource(file.absolutePath)
                     prepare()
                     start()
                     setOnCompletionListener {
@@ -122,7 +141,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 "OK"
             } catch (e: Exception) {
-                "ERROR: ${e.message}"
+                "ERROR:${e.message}"
             }
         }
 
@@ -133,12 +152,31 @@ class MainActivity : AppCompatActivity() {
                 mediaPlayer = null
                 "OK"
             } catch (e: Exception) {
-                "ERROR: ${e.message}"
+                "ERROR:${e.message}"
             }
         }
 
         @JavascriptInterface
         fun isPlaying(): Boolean = mediaPlayer?.isPlaying == true
+
+        @JavascriptInterface
+        fun listRecordings(): String {
+            val files = filesDir.listFiles() ?: return ""
+            return files
+                .filter { it.name.startsWith("grabacion_") && it.name.endsWith(".mp4") && it.length() > 0 }
+                .map { it.name.removePrefix("grabacion_").removeSuffix(".mp4").replace("_", " ") }
+                .joinToString("|")
+        }
+
+        @JavascriptInterface
+        fun deleteRecording(verseRef: String): String {
+            return try {
+                fileForRef(verseRef).delete()
+                "OK"
+            } catch (e: Exception) {
+                "ERROR:${e.message}"
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -153,17 +191,22 @@ class MainActivity : AppCompatActivity() {
                     webView.evaluateJavascript("onMicPermissionGranted()", null)
                 }
             } else {
-                Toast.makeText(this, "Permiso de microfono necesario para grabar", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this,
+                    "Permiso de microfono necesario para grabar",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mediaRecorder?.release()
-        mediaPlayer?.release()
+        try { mediaRecorder?.release() } catch (e: Exception) {}
+        try { mediaPlayer?.release() } catch (e: Exception) {}
     }
 
+    @Suppress("DEPRECATION")
     override fun onBackPressed() {
         if (webView.canGoBack()) webView.goBack()
         else super.onBackPressed()
