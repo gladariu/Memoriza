@@ -85,6 +85,16 @@ body{background:var(--gblack);color:var(--gtxt);font-family:system-ui,-apple-sys
 .ltog.on::after{transform:translateX(19px);}
 .pbadge{display:none;align-items:center;gap:5px;background:#0d2e14;padding:4px 10px;border-radius:99px;font-size:12px;color:var(--gg);margin-top:7px;}
 .pbadge.show{display:flex;}
+.recitem{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--gborder);}
+.recitem:last-child{border-bottom:none;}
+.recitem-ref{flex:1;font-size:13px;color:#f0f0f0;font-weight:500;}
+.recitem-btn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;font-size:15px;touch-action:manipulation;flex-shrink:0;}
+.recitem-play{background:var(--gg);color:#fff;}
+.recitem-play:active{opacity:.8;}
+.recitem-del{background:#2a2a2a;color:#ff6b6b;border:1px solid var(--gborder);}
+.recitem-del:active{opacity:.8;}
+.recitem-dur{font-size:11px;color:var(--gmut);min-width:32px;text-align:right;}
+.recempty{font-size:13px;color:var(--gmut);text-align:center;padding:1rem 0;}
 .lbl{font-size:12px;color:var(--gmut);margin-bottom:.4rem;}
 .mwrap{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);align-items:flex-end;justify-content:center;z-index:100;}
 .mwrap.open{display:flex;}
@@ -291,11 +301,81 @@ function openModal(){document.getElementById('mwrap').classList.add('open');}
 function closeModal(){document.getElementById('mwrap').classList.remove('open');}
 function handleOverlayClick(e){if(e.target===document.getElementById('mwrap'))closeModal();}
 function saveCustom(){var r=document.getElementById('mref').value.trim(),t=document.getElementById('mtxt').value.trim();if(!r||!t)return;custom={ref:r,text:t,questions:[],kw:t.split(' ').filter(function(_,i){return i%4===1;}).slice(0,6)};buildSel();document.getElementById('vsel').value='custom';vIdx='custom';document.getElementById('vref').textContent=custom.ref;document.getElementById('vtxt').textContent=custom.text;resetAll();closeModal();}
+
+var playingRef=null;
+function refreshRecList(){
+  try{
+    var raw=AndroidAudio.listRecordings();
+    var refs=raw?raw.split('|').filter(function(r){return r.trim()!=='';}):[];
+    var el=document.getElementById('reclist');
+    if(!refs.length){el.innerHTML='<div class="recempty">No hay grabaciones guardadas.</div>';return;}
+    el.innerHTML=refs.map(function(ref){
+      return '<div class="recitem" id="ri-'+btoa(unescape(encodeURIComponent(ref)))+'">'+
+        '<div class="recitem-ref">'+ref+'</div>'+
+        '<button class="recitem-btn recitem-play" onclick="playListItem(''+ref.replace(/'/g,"\'")+'')" title="Reproducir">'+
+          '<i class="ti ti-player-play" id="pli-'+btoa(unescape(encodeURIComponent(ref)))+'"></i>'+
+        '</button>'+
+        '<button class="recitem-btn recitem-del" onclick="deleteListItem(''+ref.replace(/'/g,"\'")+'')" title="Borrar">'+
+          '<i class="ti ti-trash"></i>'+
+        '</button>'+
+      '</div>';
+    }).join('');
+  }catch(e){document.getElementById('reclist').innerHTML='<div class="recempty">Instala la app para ver grabaciones.</div>';}
+}
+function playListItem(ref){
+  try{
+    if(playingRef&&playingRef!==ref){
+      AndroidAudio.stopPlayback();
+      var oldKey=btoa(unescape(encodeURIComponent(playingRef)));
+      var oldIcon=document.getElementById('pli-'+oldKey);
+      if(oldIcon)oldIcon.className='ti ti-player-play';
+      playingRef=null;
+    }
+    var key=btoa(unescape(encodeURIComponent(ref)));
+    var icon=document.getElementById('pli-'+key);
+    if(AndroidAudio.isPlaying()&&playingRef===ref){
+      AndroidAudio.stopPlayback();
+      if(icon)icon.className='ti ti-player-play';
+      playingRef=null;
+    }else{
+      var result=AndroidAudio.startPlayback(ref);
+      if(result==='OK'){
+        if(icon)icon.className='ti ti-player-pause';
+        playingRef=ref;
+      }
+    }
+  }catch(e){}
+}
+function deleteListItem(ref){
+  try{
+    AndroidAudio.stopPlayback();
+    AndroidAudio.deleteRecording(ref);
+    playingRef=null;
+    refreshRecList();
+  }catch(e){}
+}
+function onNativePlaybackComplete(){
+  if(playingRef){
+    var key=btoa(unescape(encodeURIComponent(playingRef)));
+    var icon=document.getElementById('pli-'+key);
+    if(icon)icon.className='ti ti-player-play';
+    playingRef=null;
+  }
+  if(isLoop&&document.getElementById('pbadge').classList.contains('show')){
+    loopCnt++;document.getElementById('lcnt').textContent=loopCnt;
+    AndroidAudio.startPlayback(getV().ref);
+  }else{
+    document.getElementById('btplay').innerHTML='<i class="ti ti-player-play"></i>';
+    document.getElementById('pbadge').classList.remove('show');
+    animW(false);
+  }
+}
 buildSel();buildWave();
 document.getElementById('vref').textContent=VERSES[0].ref;
 document.getElementById('vtxt').textContent=VERSES[0].text;
 resetAll();
 try{updateRecorderForVerse();}catch(e){}
+try{refreshRecList();}catch(e){}
 </script>
 </body>
 </html>
