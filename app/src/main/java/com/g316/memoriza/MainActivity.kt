@@ -3,6 +3,7 @@ package com.g316.memoriza
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.media.MediaRecorder
 import android.os.Bundle
 import android.webkit.*
 import android.widget.Toast
@@ -14,6 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
     private val MIC_PERMISSION_CODE = 101
+    private var pendingPermissionRequest: PermissionRequest? = null
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,33 +33,50 @@ class MainActivity : AppCompatActivity() {
             mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
         }
 
-        // Handle microphone permission requests from WebView
         webView.webChromeClient = object : WebChromeClient() {
             override fun onPermissionRequest(request: PermissionRequest) {
-                val requestedResources = request.resources
-                val audioPermission = ContextCompat.checkSelfPermission(
-                    this@MainActivity,
-                    Manifest.permission.RECORD_AUDIO
-                )
-                if (audioPermission == PackageManager.PERMISSION_GRANTED) {
-                    request.grant(requestedResources)
-                } else {
-                    // Store request and ask user
-                    pendingPermissionRequest = request
-                    ActivityCompat.requestPermissions(
+                runOnUiThread {
+                    val hasPermission = ContextCompat.checkSelfPermission(
                         this@MainActivity,
-                        arrayOf(Manifest.permission.RECORD_AUDIO),
-                        MIC_PERMISSION_CODE
-                    )
+                        Manifest.permission.RECORD_AUDIO
+                    ) == PackageManager.PERMISSION_GRANTED
+
+                    if (hasPermission) {
+                        request.grant(request.resources)
+                    } else {
+                        pendingPermissionRequest = request
+                        ActivityCompat.requestPermissions(
+                            this@MainActivity,
+                            arrayOf(Manifest.permission.RECORD_AUDIO),
+                            MIC_PERMISSION_CODE
+                        )
+                    }
                 }
             }
         }
 
-        webView.webViewClient = WebViewClient()
+        webView.webViewClient = object : WebViewClient() {
+            override fun onReceivedError(
+                view: WebView?,
+                request: WebResourceRequest?,
+                error: WebResourceError?
+            ) {
+                super.onReceivedError(view, request, error)
+            }
+        }
+
+        // Pedir permiso de micrófono al iniciar
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+            != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.RECORD_AUDIO),
+                MIC_PERMISSION_CODE
+            )
+        }
+
         webView.loadUrl("file:///android_asset/index.html")
     }
-
-    private var pendingPermissionRequest: PermissionRequest? = null
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -68,19 +87,24 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == MIC_PERMISSION_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 pendingPermissionRequest?.grant(pendingPermissionRequest?.resources)
+                // Recargar para que el WebView reconozca el permiso
+                if (pendingPermissionRequest == null) {
+                    webView.reload()
+                }
             } else {
                 pendingPermissionRequest?.deny()
-                Toast.makeText(this, "Permiso de micr\u00f3fono denegado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Permiso de micrófono necesario para grabar",
+                    Toast.LENGTH_LONG
+                ).show()
             }
             pendingPermissionRequest = null
         }
     }
 
     override fun onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack()
-        } else {
-            super.onBackPressed()
-        }
+        if (webView.canGoBack()) webView.goBack()
+        else super.onBackPressed()
     }
 }
