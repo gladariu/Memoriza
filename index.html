@@ -428,13 +428,17 @@ function getVKey(){return 'v'+(vIdx==='custom'?'c':vIdx);}
 
 function loadState(){
   try{
-    var s=JSON.parse(localStorage.getItem('memoriza_state')||'{}');
+    var raw=localStorage.getItem('memoriza_state');
+    if(!raw){return;}
+    var s=JSON.parse(raw);
     xpToday=s.xpToday||0;xpTotal=s.xpTotal||0;streak=s.streak||0;
     totalAccuracy=s.totalAccuracy||[];
     completedLessons=s.completedLessons||{};
     var today=new Date().toDateString();
     if(s.lastDate&&s.lastDate!==today){xpToday=0;}
-  }catch(e){}
+  }catch(e){
+    xpToday=0;xpTotal=0;streak=0;totalAccuracy=[];completedLessons={};
+  }
 }
 function saveState(){
   try{
@@ -750,13 +754,21 @@ function openModal(){document.getElementById('mwrap').classList.add('open');}
 function closeModal(){document.getElementById('mwrap').classList.remove('open');}
 function saveCustom(){var r=document.getElementById('mref').value.trim(),t=document.getElementById('mtxt').value.trim();if(!r||!t)return;custom={ref:r,text:t,questions:[],kw:t.split(' ').filter(function(_,i){return i%4===1;}).slice(0,6)};buildSel();document.getElementById('vsel').value='custom';vIdx='custom';document.getElementById('vref').textContent=custom.ref;document.getElementById('vtxt').textContent=custom.text;closePanel();buildLessonsPath();resetRep();buildFrags();buildKws();clearW();buildComp();closeModal();}
 
-loadState();
-buildSel();buildWave();
-document.getElementById('vref').textContent=VERSES[0].ref;
-document.getElementById('vtxt').textContent=VERSES[0].text;
-updateXPBar();updateHearts();updateStreak();
-buildLessonsPath();
-resetRep();buildFrags();buildKws();buildComp();
+try{loadState();}catch(e){console.log('loadState error',e);}
+try{buildSel();}catch(e){console.log('buildSel error',e);}
+try{buildWave();}catch(e){}
+try{
+  document.getElementById('vref').textContent=VERSES[0].ref;
+  document.getElementById('vtxt').textContent=VERSES[0].text;
+}catch(e){console.log('verse display error',e);}
+try{updateXPBar();}catch(e){}
+try{updateHearts();}catch(e){}
+try{updateStreak();}catch(e){}
+try{buildLessonsPath();}catch(e){console.log('buildLessonsPath error',e);}
+try{resetRep();}catch(e){}
+try{buildFrags();}catch(e){}
+try{buildKws();}catch(e){}
+try{buildComp();}catch(e){}
 try{updateRecorderForVerse();}catch(e){}
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 </script>
