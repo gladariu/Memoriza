@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="font-family:sans-serif;padding:2rem;background:#f7f7f7;">
+<h1 style="color:#58CC02;">✓ GitHub Pages funciona</h1>
+<div id="out" style="margin-top:1rem;"></div>
+<script>
+var out = document.getElementById('out');
+
+function row(msg, ok) {
+  var d = document.createElement('div');
+  d.style.cssText = 'padding:8px 12px;margin:4px 0;border-radius:8px;font-size:14px;font-weight:600;background:'+(ok?'#e6fbe6':'#fde8e8')+';color:'+(ok?'#46A302':'#c0392b')+';';
+  d.textContent = (ok?'✓ ':'✗ ') + msg;
+  out.appendChild(d);
+}
+
+try { var x = [1,2,3]; row('Arrays OK', true); } catch(e) { row('Arrays: '+e.message, false); }
+try { var s = document.createElement('select'); s.innerHTML=''; row('DOM OK', true); } catch(e) { row('DOM: '+e.message, false); }
+try { localStorage.setItem('t','1'); row('localStorage OK', true); } catch(e) { row('localStorage: '+e.message, false); }
+try { var VERSES=[{ref:"Juan 3:16",text:"test"}]; var sel=document.createElement('select'); VERSES.forEach(function(v,i){var o=document.createElement('option');o.value=i;o.textContent=v.ref;sel.appendChild(o);}); row('buildSel logic OK - '+sel.options.length+' items', true); } catch(e) { row('buildSel: '+e.message, false); }
+
+row('Archivo cargado: ' + new Date().toLocaleTimeString(), true);
+</script>
+</body>
+</html>
