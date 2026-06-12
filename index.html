@@ -391,7 +391,7 @@ var VERSES=[
   {ref:"Juan 3:16",text:"Porque de tal manera am\u00f3 Dios al mundo, que ha dado a su Hijo unig\u00e9nito, para que todo aquel que en \u00e9l cree, no se pierda, mas tenga vida eterna.",questions:[{q:"\u00bfPor qu\u00e9 Dios dio a su Hijo?",opts:["Por sus obras","Porque am\u00f3 al mundo","Para juzgarlo","Por su fe"],c:1},{q:"\u00bfQu\u00e9 promete a quien cree?",opts:["Riqueza","Salud","No se pierda, tenga vida eterna","Sabidur\u00eda"],c:2}],kw:["am\u00f3","Hijo unig\u00e9nito","cree","no se pierda","vida eterna"]},
   {ref:"Salmo 23:1",text:"Jehov\u00e1 es mi pastor; nada me faltar\u00e1.",questions:[{q:"\u00bfQui\u00e9n es el pastor?",opts:["David","Mois\u00e9s","Jehov\u00e1","Un \u00e1ngel"],c:2},{q:"\u00bfQu\u00e9 afirma quien tiene a Jehov\u00e1?",opts:["Bendici\u00f3n","Nada le faltar\u00e1","Larga vida","Sabidur\u00eda"],c:1}],kw:["Jehov\u00e1","pastor","nada","faltar\u00e1"]},
   {ref:"Filipenses 4:13",text:"Todo lo puedo en Cristo que me fortalece.",questions:[{q:"\u00bfEn qui\u00e9n todo lo podemos?",opts:["En nosotros","En Cristo","En la fe","En la iglesia"],c:1},{q:"\u00bfQu\u00e9 hace Cristo?",opts:["Nos salva","Nos gu\u00eda","Nos fortalece","Nos llama"],c:2}],kw:["Todo","Cristo","fortalece"]},
-  {ref:"Proverbios 3:5-6",text:"F\u00edате de Jehov\u00e1 de todo tu coraz\u00f3n, y no te apoyes en tu propia prudencia. Rec\u00f3nocele en todos tus caminos, y \u00e9l enderezar\u00e1 tus veredas.",questions:[{q:"\u00bfEn qu\u00e9 no debemos apoyarnos?",opts:["En los amigos","En nuestra prudencia","En las riquezas","En otros"],c:1},{q:"\u00bfQu\u00e9 har\u00e1 Dios?",opts:["Nos dar\u00e1 riquezas","Nos sanar\u00e1","Enderezar\u00e1 nuestras veredas","Nos dar\u00e1 paz"],c:2}],kw:["coraz\u00f3n","prudencia","caminos","enderezar\u00e1","veredas"]},
+  {ref:"Proverbios 3:5-6",text:"F\u00ed\u0430\u0442\u0435 de Jehov\u00e1 de todo tu coraz\u00f3n, y no te apoyes en tu propia prudencia. Rec\u00f3nocele en todos tus caminos, y \u00e9l enderezar\u00e1 tus veredas.",questions:[{q:"\u00bfEn qu\u00e9 no debemos apoyarnos?",opts:["En los amigos","En nuestra prudencia","En las riquezas","En otros"],c:1},{q:"\u00bfQu\u00e9 har\u00e1 Dios?",opts:["Nos dar\u00e1 riquezas","Nos sanar\u00e1","Enderezar\u00e1 nuestras veredas","Nos dar\u00e1 paz"],c:2}],kw:["coraz\u00f3n","prudencia","caminos","enderezar\u00e1","veredas"]},
   {ref:"Josu\u00e9 1:9",text:"Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehov\u00e1 tu Dios estar\u00e1 contigo en dondequiera que fueres.",questions:[{q:"\u00bfQu\u00e9 manda Dios?",opts:["Que ores","Que te esfuerces y seas valiente","Que ayunes","Que estudies"],c:1},{q:"\u00bfCu\u00e1l es la promesa?",opts:["Bendici\u00f3n","Victoria","Jehov\u00e1 estar\u00e1 contigo dondequiera","Larga vida"],c:2}],kw:["esfuerces","valiente","no temas","no desmayes","dondequiera"]},
   {ref:"Romanos 8:28",text:"Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien, esto es, a los que conforme a su prop\u00f3sito son llamados.",questions:[{q:"\u00bfA qui\u00e9nes ayudan a bien?",opts:["A los ricos","A los que aman a Dios","A los religiosos","A los sabios"],c:1},{q:"\u00bfC\u00f3mo son llamados?",opts:["Los que ayunan","Conforme a su prop\u00f3sito","Los que oran","Los que dan"],c:1}],kw:["aman a Dios","todas las cosas","bien","prop\u00f3sito","llamados"]},
   {ref:"Isa\u00edas 41:10",text:"No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudar\u00e9, siempre te sustentar\u00e9 con la diestra de mi justicia.",questions:[{q:"\u00bfPor qu\u00e9 no debemos temer?",opts:["Porque somos fuertes","Porque Dios est\u00e1 con nosotros","Porque tenemos fe","Por la oraci\u00f3n"],c:1},{q:"\u00bfCon qu\u00e9 sustenta?",opts:["Con pan","Con \u00e1ngeles","Con la diestra de su justicia","Con su ley"],c:2}],kw:["No temas","estoy contigo","no desmayes","te ayudar\u00e9","te sustentar\u00e9","diestra"]},
@@ -673,7 +673,7 @@ function onNativePlaybackComplete(){
 function updateRecorderForVerse(){
   var ref=getV().ref;
   var pb=document.getElementById('btplay');
-  if(audioBlobs&&audioBlobs[ref]){pb.className='rbtn ply';pb.disabled=false;document.getElementById('rstat').textContent='Grabación: '+ref;}
+  if(audioBlobs&&audioBlobs[ref]){pb.className='rbtn ply';pb.disabled=false;document.getElementById('rstat').textContent='Grabaci\u00f3n: '+ref;}
   else{pb.className='rbtn dis';pb.disabled=true;document.getElementById('rstat').textContent='Listo para grabar';}
   document.getElementById('rtim').textContent='0:00';
 }
@@ -689,7 +689,7 @@ function toggleRec(){
         aud=new Audio(URL.createObjectURL(blob));
         aud.onended=function(){onNativePlaybackComplete();};
         var pb=document.getElementById('btplay');pb.className='rbtn ply';pb.disabled=false;
-        document.getElementById('rstat').textContent='Grabación: '+ref;
+        document.getElementById('rstat').textContent='Grabaci\u00f3n: '+ref;
         document.getElementById('rstat').classList.remove('live');
         animW(false);document.getElementById('btrec').innerHTML='<i class="ti ti-microphone"></i>';
         refreshRecList();
