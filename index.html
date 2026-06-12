@@ -14,20 +14,14 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{background:#f7f7f7;color:#222;font-family:system-ui,-apple-system,sans-serif;min-height:100vh;padding-bottom:80px;-webkit-text-size-adjust:100%;}
-
-/* HEADER */
 .header{background:#fff;border-bottom:2px solid #ebebeb;padding:.7rem 1rem;display:flex;align-items:center;gap:.5rem;position:sticky;top:0;z-index:20;}
 .app-title{font-size:14px;font-weight:700;color:#222;}
 .streak-badge{display:flex;align-items:center;gap:3px;background:#fff8e1;border:1.5px solid #F6C012;border-radius:99px;padding:3px 10px;font-size:12px;font-weight:700;color:#e6a800;}
 .hearts{display:flex;gap:2px;align-items:center;margin-left:auto;}
-
-/* XP BAR */
 .xp-section{background:#fff;padding:.5rem 1rem .6rem;border-bottom:2px solid #ebebeb;}
 .xp-row{display:flex;justify-content:space-between;font-size:10px;color:#aaa;font-weight:600;margin-bottom:4px;}
 .xp-track{height:8px;background:#e8e8e8;border-radius:99px;overflow:hidden;}
 .xp-fill{height:100%;background:#58CC02;border-radius:99px;transition:width .5s;}
-
-/* VERSE HERO */
 .verse-hero{background:#fff;padding:1rem;border-bottom:2px solid #ebebeb;text-align:center;}
 .verse-select-row{display:flex;gap:7px;align-items:center;margin-bottom:.875rem;}
 .verse-select-row select{flex:1;background:#f7f7f7;color:#222;border:2px solid #e0e0e0;border-radius:10px;padding:8px 10px;font-size:13px;font-weight:600;-webkit-appearance:none;}
@@ -36,56 +30,37 @@ body{background:#f7f7f7;color:#222;font-family:system-ui,-apple-system,sans-seri
 .verse-icon i{color:#fff;font-size:26px;}
 .verse-ref-badge{background:#fff3cd;border:1.5px solid #F6C012;border-radius:99px;padding:3px 14px;font-size:10px;font-weight:700;color:#b8860b;letter-spacing:.07em;display:inline-block;margin-bottom:.5rem;}
 .verse-txt{font-size:14px;line-height:1.8;color:#333;font-style:italic;}
-
-/* LESSONS PATH */
 .section-label{font-size:10px;font-weight:700;color:#aaa;letter-spacing:.08em;text-transform:uppercase;padding:.75rem 1rem .3rem;background:#f7f7f7;}
 .path{padding:0 1rem .5rem;background:#f7f7f7;display:flex;flex-direction:column;gap:.4rem;}
 .lesson{display:flex;align-items:center;gap:.75rem;background:#fff;border-radius:14px;padding:.65rem .875rem;border:2px solid #ebebeb;cursor:pointer;touch-action:manipulation;}
 .lesson.active{border-color:#58CC02;background:#f6fff4;}
 .lesson.done{border-color:#c3eec3;background:#f6fff6;}
-.lesson.locked{opacity:.45;pointer-events:none;}
 .lesson:active{transform:scale(0.98);}
 .lesson-icon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .lesson-icon i{color:#fff;font-size:19px;}
-.li-green{background:#58CC02;}
-.li-blue{background:#1CB0F6;}
-.li-purple{background:#CE82FF;}
-.li-yellow{background:#F6C012;}
-.li-red{background:#E8212A;}
-.li-gray{background:#ccc;}
+.li-green{background:#58CC02;} .li-blue{background:#1CB0F6;} .li-purple{background:#CE82FF;} .li-yellow{background:#F6C012;} .li-red{background:#E8212A;}
 .lesson-info{flex:1;}
 .lesson-name{font-size:13px;font-weight:700;color:#222;}
 .lesson-sub{font-size:10px;color:#aaa;margin-top:1px;}
 .lbadge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap;}
-.lb-green{background:#e6fbe6;color:#46A302;}
-.lb-red{background:#fde8e8;color:#c0392b;}
-.lb-lock{background:#f0f0f0;color:#bbb;}
-.lb-xp{background:#fff3cd;color:#b8860b;}
-
-/* LESSON PANEL */
+.lb-green{background:#e6fbe6;color:#46A302;} .lb-red{background:#fde8e8;color:#c0392b;} .lb-xp{background:#fff3cd;color:#b8860b;}
 .lesson-panel{display:none;background:#fff;margin:.5rem 1rem 0;border-radius:16px;border:2px solid #ebebeb;overflow:hidden;}
 .lesson-panel.active{display:block;}
 .lp-header{background:#f7f7f7;padding:.75rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:2px solid #ebebeb;}
 .lp-title{font-size:14px;font-weight:700;color:#222;flex:1;}
 .lp-close{width:28px;height:28px;border-radius:99px;background:#e0e0e0;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:#666;}
 .lp-body{padding:1rem;}
-
-/* BUTTONS */
 .btnp{padding:10px 18px;border-radius:12px;background:#58CC02;color:#fff;border:none;border-bottom:3px solid #46A302;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;gap:5px;touch-action:manipulation;}
 .btnp:active{border-bottom-width:1px;transform:translateY(2px);}
 .btns{padding:10px 18px;border-radius:12px;background:#fff;color:#777;border:2px solid #e0e0e0;cursor:pointer;font-size:14px;font-weight:600;display:flex;align-items:center;gap:5px;touch-action:manipulation;}
 .btns:active{background:#f7f7f7;}
 .frow{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:.75rem;}
-
-/* REP */
 .cbig{font-size:40px;font-weight:700;color:#58CC02;text-align:center;margin:.4rem 0;}
 .cbig span{font-size:14px;color:#aaa;font-weight:400;}
 .pbar{height:10px;background:#e8e8e8;border-radius:99px;margin:.6rem 0;overflow:hidden;}
 .pfill{height:100%;background:#58CC02;border-radius:99px;transition:width .4s;}
 .rvbox{font-size:14px;line-height:1.8;text-align:center;color:#333;font-style:italic;min-height:50px;margin:.6rem 0;padding:12px;background:#f7f7f7;border-radius:10px;border:2px solid #ebebeb;}
 .okbox{display:none;margin-top:.75rem;padding:12px;background:#e6fbe6;border:2px solid #58CC02;border-radius:12px;text-align:center;color:#46A302;font-size:14px;font-weight:700;}
-
-/* COMP */
 .cq{font-size:14px;font-weight:700;color:#222;margin-bottom:.75rem;line-height:1.5;}
 .copts{display:flex;flex-direction:column;gap:7px;}
 .copt{padding:12px 14px;border-radius:12px;border:2px solid #e0e0e0;background:#fff;cursor:pointer;font-size:14px;color:#333;font-weight:600;touch-action:manipulation;}
@@ -93,34 +68,21 @@ body{background:#f7f7f7;color:#222;font-family:system-ui,-apple-system,sans-seri
 .copt.correct{background:#e6fbe6;border-color:#58CC02;color:#46A302;}
 .copt.wrong{background:#fde8e8;border-color:#E8212A;color:#c0392b;}
 .cfb{margin-top:.75rem;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:600;}
-.cfb.ok{background:#e6fbe6;color:#46A302;}
-.cfb.no{background:#fde8e8;color:#c0392b;}
-
-/* FRAGS */
+.cfb.ok{background:#e6fbe6;color:#46A302;} .cfb.no{background:#fde8e8;color:#c0392b;}
 .frags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:.75rem;}
 .frag{padding:8px 13px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;font-size:13px;font-weight:600;cursor:pointer;color:#333;touch-action:manipulation;}
 .frag.hid{background:#1CB0F6;border-color:#1CB0F6;color:#fff;}
 .frag:active{transform:scale(0.97);}
-
-/* KW */
 .kwv{font-size:15px;line-height:2.5;text-align:center;margin-bottom:.75rem;color:#333;word-break:break-word;}
 .kwb{display:inline-block;min-width:44px;background:#CE82FF;border-radius:6px;padding:2px 6px;cursor:pointer;color:transparent;touch-action:manipulation;}
 .kwb.sh{color:#fff;font-weight:700;}
-
-/* WRITE */
 .warea{width:100%;min-height:90px;padding:12px;border:2px solid #e0e0e0;border-radius:12px;background:#f7f7f7;font-size:14px;line-height:1.7;resize:none;font-family:system-ui,-apple-system,sans-serif;color:#333;}
 .warea:focus{outline:none;border-color:#58CC02;}
 .wres{margin-top:.75rem;font-size:14px;line-height:2;word-break:break-word;}
-.wok{color:#46A302;font-weight:700;}
-.werr{color:#E8212A;text-decoration:underline;}
-.wmis{color:#F6C012;font-weight:700;}
+.wok{color:#46A302;font-weight:700;} .werr{color:#E8212A;text-decoration:underline;} .wmis{color:#F6C012;font-weight:700;}
 .srow{display:flex;gap:7px;flex-wrap:wrap;margin-top:.6rem;}
 .chip{padding:4px 12px;border-radius:99px;font-size:12px;font-weight:700;}
-.chipg{background:#e6fbe6;color:#46A302;}
-.chipr{background:#fde8e8;color:#c0392b;}
-.chipy{background:#fff3cd;color:#b8860b;}
-
-/* RECORDER */
+.chipg{background:#e6fbe6;color:#46A302;} .chipr{background:#fde8e8;color:#c0392b;} .chipy{background:#fff3cd;color:#b8860b;}
 .recsec{background:#fff;margin:.5rem 1rem 0;border-radius:16px;border:2px solid #ebebeb;padding:1rem;}
 .rectitle{font-size:13px;font-weight:700;color:#222;display:flex;align-items:center;gap:7px;margin-bottom:.75rem;}
 .rectitle i{color:#E8212A;font-size:17px;}
@@ -144,8 +106,7 @@ body{background:#f7f7f7;color:#222;font-family:system-ui,-apple-system,sans-seri
 .ltog.on::after{transform:translateX(19px);}
 .pbadge{display:none;align-items:center;gap:5px;background:#e6fbe6;padding:4px 10px;border-radius:99px;font-size:12px;color:#46A302;font-weight:700;margin-top:7px;}
 .pbadge.show{display:flex;}
-
-/* REC LIST */
+.lbl{font-size:12px;color:#aaa;font-weight:600;margin-bottom:.4rem;}
 .recitem{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:2px solid #f0f0f0;}
 .recitem:last-child{border-bottom:none;}
 .recitem-ref{flex:1;font-size:13px;color:#222;font-weight:600;}
@@ -153,80 +114,60 @@ body{background:#f7f7f7;color:#222;font-family:system-ui,-apple-system,sans-seri
 .recitem-play{background:#58CC02;color:#fff;}
 .recitem-del{background:#f0f0f0;color:#E8212A;border:2px solid #e0e0e0;}
 .recempty{font-size:13px;color:#aaa;text-align:center;padding:1rem 0;font-weight:600;}
-
-/* BOTTOM NAV */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #ebebeb;display:flex;justify-content:space-around;padding:.4rem 0;z-index:20;}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:.25rem .5rem;cursor:pointer;touch-action:manipulation;}
 .nav-item i{font-size:22px;color:#ccc;}
 .nav-item.active i{color:#58CC02;}
 .nav-item span{font-size:9px;color:#bbb;font-weight:700;}
 .nav-item.active span{color:#58CC02;}
-
-/* MODAL */
+.screen{display:none;}
+.screen.active{display:block;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin:.5rem 1rem 0;}
+.stat-box{background:#fff;border-radius:14px;border:2px solid #ebebeb;padding:.875rem;text-align:center;}
+.stat-num{font-size:28px;font-weight:700;color:#58CC02;}
+.stat-lbl{font-size:10px;color:#aaa;font-weight:700;margin-top:2px;text-transform:uppercase;letter-spacing:.05em;}
+.vlist-item{background:#fff;border-radius:14px;border:2px solid #ebebeb;padding:.75rem 1rem;margin:.4rem 1rem 0;display:flex;align-items:center;gap:.75rem;cursor:pointer;touch-action:manipulation;}
+.vlist-item.selected{border-color:#58CC02;}
+.goal-row{display:flex;gap:7px;align-items:center;justify-content:center;margin-bottom:.6rem;}
+.goal-row label{font-size:12px;color:#aaa;font-weight:600;}
+.goal-row select{background:#f7f7f7;color:#222;border:2px solid #e0e0e0;border-radius:8px;padding:5px 8px;font-size:13px;font-weight:600;}
 .mwrap{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);align-items:flex-end;justify-content:center;z-index:100;}
 .mwrap.open{display:flex;}
 .mbox{background:#fff;border-radius:20px 20px 0 0;padding:1.5rem 1.25rem;width:100%;}
 .mbox h3{font-size:16px;font-weight:700;color:#222;margin-bottom:.875rem;}
 .minput{width:100%;padding:10px 12px;border-radius:10px;border:2px solid #e0e0e0;background:#f7f7f7;font-size:14px;color:#222;margin-bottom:7px;font-family:system-ui,-apple-system,sans-serif;}
 .mta{width:100%;padding:10px 12px;border-radius:10px;border:2px solid #e0e0e0;background:#f7f7f7;font-size:14px;color:#222;min-height:90px;resize:none;font-family:system-ui,-apple-system,sans-serif;}
-
-/* SCREENS */
-.screen{display:none;}
-.screen.active{display:block;}
-
-/* PROGRESS SCREEN */
-.prog-card{background:#fff;border-radius:14px;border:2px solid #ebebeb;padding:1rem;margin:.5rem 1rem 0;}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin:.5rem 1rem 0;}
-.stat-box{background:#fff;border-radius:14px;border:2px solid #ebebeb;padding:.875rem;text-align:center;}
-.stat-num{font-size:28px;font-weight:700;color:#58CC02;}
-.stat-lbl{font-size:10px;color:#aaa;font-weight:700;margin-top:2px;text-transform:uppercase;letter-spacing:.05em;}
-
-/* VERSES LIST SCREEN */
-.vlist-item{background:#fff;border-radius:14px;border:2px solid #ebebeb;padding:.75rem 1rem;margin:.4rem 1rem 0;display:flex;align-items:center;gap:.75rem;cursor:pointer;touch-action:manipulation;}
-.vlist-item.selected{border-color:#58CC02;}
-.vlist-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.vlist-name{font-size:13px;font-weight:700;color:#222;flex:1;}
-.vlist-prog{font-size:10px;color:#aaa;font-weight:600;}
-.goal-row{display:flex;gap:7px;align-items:center;justify-content:center;margin-bottom:.6rem;}
-.goal-row label{font-size:12px;color:#aaa;font-weight:600;}
-.goal-row select{background:#f7f7f7;color:#222;border:2px solid #e0e0e0;border-radius:8px;padding:5px 8px;font-size:13px;font-weight:600;}
-.lbl{font-size:11px;color:#aaa;font-weight:600;margin-bottom:.4rem;}
 </style>
 </head>
 <body>
-
 <div class="header">
-  <div style="font-size:14px;font-weight:800;color:#222;">Memoriza</div>
-  <div class="streak-badge" id="streak-badge"><i class="ti ti-flame" aria-hidden="true"></i> <span id="streak-num">0</span></div>
+  <div class="app-title">Memoriza</div>
+  <div class="streak-badge"><i class="ti ti-flame"></i> <span id="streak-num">0</span></div>
   <div class="hearts" id="hearts-display"></div>
 </div>
-
 <div class="xp-section">
   <div class="xp-row"><span>XP hoy</span><span style="color:#58CC02;font-weight:700;" id="xp-label">0 / 100</span></div>
   <div class="xp-track"><div class="xp-fill" id="xp-fill" style="width:0%"></div></div>
 </div>
 
-<!-- SCREEN: HOME -->
 <div class="screen active" id="screen-home">
   <div class="verse-hero">
     <div class="verse-select-row">
       <select id="vsel" onchange="selVerse()"></select>
-      <button class="btn-add" onclick="openModal()"><i class="ti ti-plus" aria-hidden="true"></i></button>
+      <button class="btn-add" onclick="openModal()"><i class="ti ti-plus"></i></button>
     </div>
-    <div class="verse-icon"><i class="ti ti-book" aria-hidden="true"></i></div>
+    <div class="verse-icon"><i class="ti ti-book"></i></div>
     <div class="verse-ref-badge" id="vref"></div>
     <div class="verse-txt" id="vtxt"></div>
   </div>
-
   <div class="section-label">Lecciones</div>
   <div class="path" id="lessons-path"></div>
 
-  <!-- LESSON PANELS -->
   <div class="lesson-panel" id="panel-rep">
     <div class="lp-header">
-      <div class="lesson-icon li-green" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"><i class="ti ti-refresh" aria-hidden="true" style="font-size:14px;color:#fff;"></i></div>
+      <div class="lesson-icon li-green" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"><i class="ti ti-refresh" style="font-size:14px;color:#fff;"></i></div>
       <div class="lp-title">Repetici&#243;n</div>
-      <button class="lp-close" onclick="closePanel()"><i class="ti ti-x" aria-hidden="true"></i></button>
+      <button class="lp-close" onclick="closePanel()"><i class="ti ti-x"></i></button>
     </div>
     <div class="lp-body">
       <div class="goal-row">
@@ -240,9 +181,9 @@ body{background:#f7f7f7;color:#222;font-family:system-ui,-apple-system,sans-seri
       <div class="pbar"><div class="pfill" id="rpbar" style="width:0%"></div></div>
       <div class="rvbox" id="rvbox"></div>
       <div class="frow">
-        <button class="btnp" onclick="doRep()"><i class="ti ti-check" aria-hidden="true"></i> Repet&#237;</button>
-        <button class="btns" onclick="resetRep()"><i class="ti ti-refresh" aria-hidden="true"></i> Reiniciar</button>
-        <button class="btns" id="btnhide" onclick="toggleHide()"><i class="ti ti-eye-off" aria-hidden="true"></i> Ocultar</button>
+        <button class="btnp" onclick="doRep()"><i class="ti ti-check"></i> Repet&#237;</button>
+        <button class="btns" onclick="resetRep()"><i class="ti ti-refresh"></i> Reiniciar</button>
+        <button class="btns" id="btnhide" onclick="toggleHide()"><i class="ti ti-eye-off"></i> Ocultar</button>
       </div>
       <div class="okbox" id="repok">&#127881; &#161;Completaste <span id="repokn"></span> repeticiones! +20 XP</div>
     </div>
@@ -250,16 +191,16 @@ body{background:#f7f7f7;color:#222;font-family:system-ui,-apple-system,sans-seri
 
   <div class="lesson-panel" id="panel-frag">
     <div class="lp-header">
-      <div class="lesson-icon li-blue" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"><i class="ti ti-puzzle" aria-hidden="true" style="font-size:14px;color:#fff;"></i></div>
+      <div class="lesson-icon li-blue" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"><i class="ti ti-puzzle" style="font-size:14px;color:#fff;"></i></div>
       <div class="lp-title">Fragmentos</div>
-      <button class="lp-close" onclick="closePanel()"><i class="ti ti-x" aria-hidden="true"></i></button>
+      <button class="lp-close" onclick="closePanel()"><i class="ti ti-x"></i></button>
     </div>
     <div class="lp-body">
       <div class="lbl">Toca cada bloque para revelarlo</div>
       <div class="frags" id="fragct"></div>
       <div class="frow">
-        <button class="btnp" onclick="revAllF()"><i class="ti ti-eye" aria-hidden="true"></i> Revelar todo</button>
-        <button class="btns" onclick="resetF()"><i class="ti ti-refresh" aria-hidden="true"></i> Reiniciar</button>
+        <button class="btnp" onclick="revAllF()"><i class="ti ti-eye"></i> Revelar todo</button>
+        <button class="btns" onclick="resetF()"><i class="ti ti-refresh"></i> Reiniciar</button>
       </div>
       <div class="okbox" id="fragok" style="margin-top:.75rem;">&#127881; &#161;Todos revelados! +15 XP</div>
     </div>
@@ -267,58 +208,58 @@ body{background:#f7f7f7;color:#222;font-family:system-ui,-apple-system,sans-seri
 
   <div class="lesson-panel" id="panel-kw">
     <div class="lp-header">
-      <div class="lesson-icon li-purple" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"><i class="ti ti-key" aria-hidden="true" style="font-size:14px;color:#fff;"></i></div>
+      <div class="lesson-icon li-purple" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"><i class="ti ti-key" style="font-size:14px;color:#fff;"></i></div>
       <div class="lp-title">Palabras clave</div>
-      <button class="lp-close" onclick="closePanel()"><i class="ti ti-x" aria-hidden="true"></i></button>
+      <button class="lp-close" onclick="closePanel()"><i class="ti ti-x"></i></button>
     </div>
     <div class="lp-body">
       <div class="lbl" style="text-align:center;margin-bottom:.75rem;">Toca las palabras ocultas para revelarlas</div>
       <div class="kwv" id="kwct"></div>
       <div id="kwlbl" style="font-size:11px;color:#aaa;font-weight:600;text-align:center;margin-bottom:.6rem;"></div>
       <div class="frow">
-        <button class="btnp" onclick="revAllKw()"><i class="ti ti-eye" aria-hidden="true"></i> Revelar todas</button>
-        <button class="btns" onclick="resetKw()"><i class="ti ti-refresh" aria-hidden="true"></i> Reiniciar</button>
+        <button class="btnp" onclick="revAllKw()"><i class="ti ti-eye"></i> Revelar todas</button>
+        <button class="btns" onclick="resetKw()"><i class="ti ti-refresh"></i> Reiniciar</button>
       </div>
     </div>
   </div>
 
   <div class="lesson-panel" id="panel-comp">
     <div class="lp-header">
-      <div class="lesson-icon li-yellow" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"><i class="ti ti-brain" aria-hidden="true" style="font-size:14px;color:#fff;"></i></div>
+      <div class="lesson-icon li-yellow" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"><i class="ti ti-brain" style="font-size:14px;color:#fff;"></i></div>
       <div class="lp-title">Comprensi&#243;n</div>
-      <button class="lp-close" onclick="closePanel()"><i class="ti ti-x" aria-hidden="true"></i></button>
+      <button class="lp-close" onclick="closePanel()"><i class="ti ti-x"></i></button>
     </div>
     <div class="lp-body"><div id="compct"></div></div>
   </div>
 
   <div class="lesson-panel" id="panel-write">
     <div class="lp-header">
-      <div class="lesson-icon li-red" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"><i class="ti ti-pencil" aria-hidden="true" style="font-size:14px;color:#fff;"></i></div>
-      <div class="lp-title">Escritura — Final Boss</div>
-      <button class="lp-close" onclick="closePanel()"><i class="ti ti-x" aria-hidden="true"></i></button>
+      <div class="lesson-icon li-red" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"><i class="ti ti-pencil" style="font-size:14px;color:#fff;"></i></div>
+      <div class="lp-title">Escritura</div>
+      <button class="lp-close" onclick="closePanel()"><i class="ti ti-x"></i></button>
     </div>
     <div class="lp-body">
       <div class="lbl" style="margin-bottom:.5rem;">Escribe el vers&#237;culo completo de memoria</div>
       <textarea class="warea" id="warea" placeholder="Escribe aqu&#237;..."></textarea>
       <div class="frow" style="margin-top:.6rem;">
-        <button class="btnp" onclick="checkW()"><i class="ti ti-check" aria-hidden="true"></i> Comparar</button>
-        <button class="btns" onclick="clearW()"><i class="ti ti-trash" aria-hidden="true"></i> Borrar</button>
+        <button class="btnp" onclick="checkW()"><i class="ti ti-check"></i> Comparar</button>
+        <button class="btns" onclick="clearW()"><i class="ti ti-trash"></i> Borrar</button>
       </div>
       <div class="wres" id="wres"></div>
     </div>
   </div>
 
   <div class="recsec">
-    <div class="rectitle"><i class="ti ti-microphone" aria-hidden="true"></i> Grabador de voz</div>
+    <div class="rectitle"><i class="ti ti-microphone"></i> Grabador de voz</div>
     <div class="wave" id="wave"></div>
     <div class="recrow">
-      <button class="rbtn rec" id="btrec" onclick="toggleRec()"><i class="ti ti-microphone" aria-hidden="true"></i></button>
-      <button class="rbtn dis" id="btplay" onclick="doPlay()"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+      <button class="rbtn rec" id="btrec" onclick="toggleRec()"><i class="ti ti-microphone"></i></button>
+      <button class="rbtn dis" id="btplay" onclick="doPlay()"><i class="ti ti-player-play"></i></button>
       <div><div class="rtim" id="rtim">0:00</div><div class="rstat" id="rstat">Listo para grabar</div></div>
     </div>
-    <div class="pbadge" id="pbadge"><i class="ti ti-repeat" aria-hidden="true"></i> Loop activo...</div>
+    <div class="pbadge" id="pbadge"><i class="ti ti-repeat"></i> Loop activo...</div>
     <div class="looprow">
-      <i class="ti ti-repeat" aria-hidden="true" style="font-size:15px;color:#ccc;"></i>
+      <i class="ti ti-repeat" style="font-size:15px;color:#ccc;"></i>
       <span style="font-size:13px;color:#555;font-weight:600;">Loop</span>
       <div class="ltog" id="ltog" onclick="toggleLoop()"></div>
       <span style="font-size:12px;color:#aaa;font-weight:600;margin-left:auto;">Repeticiones: <strong id="lcnt">0</strong></span>
@@ -326,24 +267,21 @@ body{background:#f7f7f7;color:#222;font-family:system-ui,-apple-system,sans-seri
   </div>
 </div>
 
-<!-- SCREEN: VERSES -->
 <div class="screen" id="screen-verses">
   <div class="section-label">Todos los vers&#237;culos</div>
   <div id="vlist-container"></div>
 </div>
 
-<!-- SCREEN: RECORDINGS -->
 <div class="screen" id="screen-rec">
   <div class="section-label">Mis grabaciones</div>
   <div class="recsec" style="margin:.5rem 1rem 0;">
     <div style="display:flex;justify-content:flex-end;margin-bottom:.5rem;">
-      <button class="btns" style="padding:5px 10px;font-size:12px;" onclick="refreshRecList()"><i class="ti ti-refresh" aria-hidden="true"></i> Actualizar</button>
+      <button class="btns" style="padding:5px 10px;font-size:12px;" onclick="refreshRecList()"><i class="ti ti-refresh"></i> Actualizar</button>
     </div>
     <div id="reclist"><div class="recempty">No hay grabaciones guardadas.</div></div>
   </div>
 </div>
 
-<!-- SCREEN: PROGRESS -->
 <div class="screen" id="screen-prog">
   <div class="section-label">Tu progreso</div>
   <div class="stat-grid">
@@ -352,26 +290,13 @@ body{background:#f7f7f7;color:#222;font-family:system-ui,-apple-system,sans-seri
     <div class="stat-box"><div class="stat-num" id="stat-xp">0</div><div class="stat-lbl">XP total</div></div>
     <div class="stat-box"><div class="stat-num" id="stat-acc" style="color:#1CB0F6;">0%</div><div class="stat-lbl">Precisi&#243;n</div></div>
   </div>
-  <div class="prog-card" style="margin-top:.5rem;">
-    <div style="font-size:12px;font-weight:700;color:#aaa;margin-bottom:.5rem;">LOGROS</div>
-    <div id="achievements"></div>
-  </div>
 </div>
 
-<!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <div class="nav-item active" id="nav-home" onclick="showScreen('home')">
-    <i class="ti ti-home" aria-hidden="true"></i><span>Inicio</span>
-  </div>
-  <div class="nav-item" id="nav-verses" onclick="showScreen('verses')">
-    <i class="ti ti-book" aria-hidden="true"></i><span>Vers&#237;culos</span>
-  </div>
-  <div class="nav-item" id="nav-rec" onclick="showScreen('rec')">
-    <i class="ti ti-microphone" aria-hidden="true"></i><span>Grabaciones</span>
-  </div>
-  <div class="nav-item" id="nav-prog" onclick="showScreen('prog')">
-    <i class="ti ti-chart-bar" aria-hidden="true"></i><span>Progreso</span>
-  </div>
+  <div class="nav-item active" id="nav-home" onclick="showScreen('home')"><i class="ti ti-home"></i><span>Inicio</span></div>
+  <div class="nav-item" id="nav-verses" onclick="showScreen('verses')"><i class="ti ti-book"></i><span>Vers&#237;culos</span></div>
+  <div class="nav-item" id="nav-rec" onclick="showScreen('rec')"><i class="ti ti-microphone"></i><span>Grabaciones</span></div>
+  <div class="nav-item" id="nav-prog" onclick="showScreen('prog')"><i class="ti ti-chart-bar"></i><span>Progreso</span></div>
 </div>
 
 <div class="mwrap" id="mwrap" onclick="if(event.target===this)closeModal()">
@@ -381,47 +306,48 @@ body{background:#f7f7f7;color:#222;font-family:system-ui,-apple-system,sans-seri
     <textarea class="mta" id="mtxt" placeholder="Texto del vers&#237;culo..."></textarea>
     <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:.875rem;">
       <button class="btns" onclick="closeModal()">Cancelar</button>
-      <button class="btnp" onclick="saveCustom()"><i class="ti ti-check" aria-hidden="true"></i> Guardar</button>
+      <button class="btnp" onclick="saveCustom()"><i class="ti ti-check"></i> Guardar</button>
     </div>
   </div>
 </div>
 
 <script>
 var VERSES=[
-  {ref:"Juan 3:16",text:"Porque de tal manera am\u00f3 Dios al mundo, que ha dado a su Hijo unig\u00e9nito, para que todo aquel que en \u00e9l cree, no se pierda, mas tenga vida eterna.",questions:[{q:"\u00bfPor qu\u00e9 Dios dio a su Hijo?",opts:["Por sus obras","Porque am\u00f3 al mundo","Para juzgarlo","Por su fe"],c:1},{q:"\u00bfQu\u00e9 promete a quien cree?",opts:["Riqueza","Salud","No se pierda, tenga vida eterna","Sabidur\u00eda"],c:2}],kw:["am\u00f3","Hijo unig\u00e9nito","cree","no se pierda","vida eterna"]},
-  {ref:"Salmo 23:1",text:"Jehov\u00e1 es mi pastor; nada me faltar\u00e1.",questions:[{q:"\u00bfQui\u00e9n es el pastor?",opts:["David","Mois\u00e9s","Jehov\u00e1","Un \u00e1ngel"],c:2},{q:"\u00bfQu\u00e9 afirma quien tiene a Jehov\u00e1?",opts:["Bendici\u00f3n","Nada le faltar\u00e1","Larga vida","Sabidur\u00eda"],c:1}],kw:["Jehov\u00e1","pastor","nada","faltar\u00e1"]},
-  {ref:"Filipenses 4:13",text:"Todo lo puedo en Cristo que me fortalece.",questions:[{q:"\u00bfEn qui\u00e9n todo lo podemos?",opts:["En nosotros","En Cristo","En la fe","En la iglesia"],c:1},{q:"\u00bfQu\u00e9 hace Cristo?",opts:["Nos salva","Nos gu\u00eda","Nos fortalece","Nos llama"],c:2}],kw:["Todo","Cristo","fortalece"]},
-  {ref:"Proverbios 3:5-6",text:"F\u00ed\u0430\u0442\u0435 de Jehov\u00e1 de todo tu coraz\u00f3n, y no te apoyes en tu propia prudencia. Rec\u00f3nocele en todos tus caminos, y \u00e9l enderezar\u00e1 tus veredas.",questions:[{q:"\u00bfEn qu\u00e9 no debemos apoyarnos?",opts:["En los amigos","En nuestra prudencia","En las riquezas","En otros"],c:1},{q:"\u00bfQu\u00e9 har\u00e1 Dios?",opts:["Nos dar\u00e1 riquezas","Nos sanar\u00e1","Enderezar\u00e1 nuestras veredas","Nos dar\u00e1 paz"],c:2}],kw:["coraz\u00f3n","prudencia","caminos","enderezar\u00e1","veredas"]},
-  {ref:"Josu\u00e9 1:9",text:"Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehov\u00e1 tu Dios estar\u00e1 contigo en dondequiera que fueres.",questions:[{q:"\u00bfQu\u00e9 manda Dios?",opts:["Que ores","Que te esfuerces y seas valiente","Que ayunes","Que estudies"],c:1},{q:"\u00bfCu\u00e1l es la promesa?",opts:["Bendici\u00f3n","Victoria","Jehov\u00e1 estar\u00e1 contigo dondequiera","Larga vida"],c:2}],kw:["esfuerces","valiente","no temas","no desmayes","dondequiera"]},
-  {ref:"Romanos 8:28",text:"Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien, esto es, a los que conforme a su prop\u00f3sito son llamados.",questions:[{q:"\u00bfA qui\u00e9nes ayudan a bien?",opts:["A los ricos","A los que aman a Dios","A los religiosos","A los sabios"],c:1},{q:"\u00bfC\u00f3mo son llamados?",opts:["Los que ayunan","Conforme a su prop\u00f3sito","Los que oran","Los que dan"],c:1}],kw:["aman a Dios","todas las cosas","bien","prop\u00f3sito","llamados"]},
-  {ref:"Isa\u00edas 41:10",text:"No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudar\u00e9, siempre te sustentar\u00e9 con la diestra de mi justicia.",questions:[{q:"\u00bfPor qu\u00e9 no debemos temer?",opts:["Porque somos fuertes","Porque Dios est\u00e1 con nosotros","Porque tenemos fe","Por la oraci\u00f3n"],c:1},{q:"\u00bfCon qu\u00e9 sustenta?",opts:["Con pan","Con \u00e1ngeles","Con la diestra de su justicia","Con su ley"],c:2}],kw:["No temas","estoy contigo","no desmayes","te ayudar\u00e9","te sustentar\u00e9","diestra"]},
-  {ref:"Mateo 6:33",text:"Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os ser\u00e1n a\u00f1adidas.",questions:[{q:"\u00bfQu\u00e9 debemos buscar primero?",opts:["El \u00e9xito","El reino de Dios y su justicia","La sabidur\u00eda","La paz"],c:1},{q:"\u00bfQu\u00e9 promete?",opts:["Paz","Todas estas cosas os ser\u00e1n a\u00f1adidas","Salvaci\u00f3n","Sabidur\u00eda"],c:1}],kw:["buscad","primeramente","reino de Dios","justicia","a\u00f1adidas"]},
-  {ref:"Jerem\u00edas 29:11",text:"Porque yo s\u00e9 los pensamientos que tengo acerca de vosotros, dice Jehov\u00e1, pensamientos de paz, y no de mal, para daros el fin que esper\u00e1is.",questions:[{q:"\u00bfC\u00f3mo son los pensamientos de Dios?",opts:["De juicio","De paz y no de mal","De prueba","De correcci\u00f3n"],c:1},{q:"\u00bfPara qu\u00e9?",opts:["Para juzgarnos","Para probarnos","Para darnos el fin que esperamos","Para guiarnos"],c:2}],kw:["pensamientos","paz","no de mal","fin","esper\u00e1is"]},
-  {ref:"Salmo 46:1",text:"Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones.",questions:[{q:"\u00bfQu\u00e9 es Dios?",opts:["Nuestro juez","Nuestro amparo y fortaleza","Nuestro maestro","Nuestro creador"],c:1},{q:"\u00bfCu\u00e1ndo es auxilio?",opts:["Siempre","En la prosperidad","En las tribulaciones","En la oraci\u00f3n"],c:2}],kw:["amparo","fortaleza","pronto auxilio","tribulaciones"]},
-  {ref:"2 Corintios 5:17",text:"De modo que si alguno est\u00e1 en Cristo, nueva criatura es; las cosas viejas pasaron; he aqu\u00ed todas son hechas nuevas.",questions:[{q:"\u00bfQu\u00e9 es quien est\u00e1 en Cristo?",opts:["Salvo","Nueva criatura","Libre","Bendecido"],c:1},{q:"\u00bfQu\u00e9 pasa con las cosas viejas?",opts:["Se mejoran","Se olvidan","Pasaron","Se transforman"],c:2}],kw:["Cristo","nueva criatura","cosas viejas","pasaron","nuevas"]},
-  {ref:"Salmo 119:105",text:"L\u00e1mpara es a mis pies tu palabra, y lumbrera a mi camino.",questions:[{q:"\u00bfA qu\u00e9 compara la Palabra?",opts:["A un arma","A una l\u00e1mpara y lumbrera","A un escudo","A una espada"],c:1},{q:"\u00bfQu\u00e9 ilumina?",opts:["El coraz\u00f3n","El futuro","Los pies y el camino","La mente"],c:2}],kw:["L\u00e1mpara","pies","palabra","lumbrera","camino"]},
-  {ref:"Juan 14:6",text:"Jes\u00fas le dijo: Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por m\u00ed.",questions:[{q:"\u00bfQu\u00e9 afirma Jes\u00fas?",opts:["Que es Rey","El camino, la verdad y la vida","El Mes\u00edas","El Salvador"],c:1},{q:"\u00bfC\u00f3mo se llega al Padre?",opts:["Por las obras","Por la oraci\u00f3n","S\u00f3lo por Jes\u00fas","Por los ap\u00f3stoles"],c:2}],kw:["camino","verdad","vida","nadie","Padre","por m\u00ed"]},
-  {ref:"Efesios 2:8-9",text:"Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se glor\u00ede.",questions:[{q:"\u00bfPor qu\u00e9 medio?",opts:["Por obras","Por gracia mediante la fe","Por m\u00e9ritos","Por ritos"],c:1},{q:"\u00bfPor qu\u00e9 no por obras?",opts:["No importan","Para que nadie se glor\u00ede","No hay obras buenas","Dios no las acepta"],c:1}],kw:["gracia","salvos","fe","don de Dios","no por obras"]},
-  {ref:"Romanos 10:9",text:"Que si confesares con tu boca que Jes\u00fas es el Se\u00f1or, y creyeres en tu coraz\u00f3n que Dios le levant\u00f3 de los muertos, ser\u00e1s salvo.",questions:[{q:"\u00bfQu\u00e9 debes confesar?",opts:["Tus pecados","Que Jes\u00fas es el Se\u00f1or","Tu fe","Tus obras"],c:1},{q:"\u00bfQu\u00e9 debes creer?",opts:["Que Dios existe","Que la Biblia es verdad","Que Dios levant\u00f3 a Jes\u00fas","Que Jes\u00fas vendr\u00e1"],c:2}],kw:["confesares","boca","Se\u00f1or","creyeres","coraz\u00f3n","levant\u00f3","salvo"]},
-  {ref:"1 Juan 1:9",text:"Si confesamos nuestros pecados, \u00e9l es fiel y justo para perdonar nuestros pecados, y limpiarnos de toda maldad.",questions:[{q:"\u00bfQu\u00e9 debemos confesar?",opts:["Nuestra fe","Nuestros pecados","Nuestras oraciones","Nuestra debilidad"],c:1},{q:"\u00bfDe qu\u00e9 nos limpia?",opts:["Del dolor","De las enfermedades","De toda maldad","Del pecado original"],c:2}],kw:["confesamos","pecados","fiel","justo","perdonar","limpiarnos","maldad"]},
-  {ref:"G\u00e1latas 2:20",text:"Con Cristo estoy juntamente crucificado, y ya no vivo yo, mas vive Cristo en m\u00ed; y lo que ahora vivo en la carne, lo vivo en la fe del Hijo de Dios, el cual me am\u00f3 y se entreg\u00f3 a s\u00ed mismo por m\u00ed.",questions:[{q:"\u00bfQui\u00e9n vive en el creyente?",opts:["El Esp\u00edritu","Cristo","Dios","Un \u00e1ngel"],c:1},{q:"\u00bfC\u00f3mo vive en la carne?",opts:["Por la ley","En la fe del Hijo de Dios","Por la oraci\u00f3n","Por la obediencia"],c:1}],kw:["crucificado","ya no vivo yo","vive Cristo en m\u00ed","fe","Hijo de Dios","me am\u00f3"]},
-  {ref:"Romanos 12:2",text:"No os conform\u00e9is a este siglo, sino transform\u00e1os por medio de la renovaci\u00f3n de vuestro entendimiento, para que comprob\u00e9is cu\u00e1l sea la buena voluntad de Dios, agradable y perfecta.",questions:[{q:"\u00bfA qu\u00e9 no debemos conformarnos?",opts:["A la iglesia","A los l\u00edderes","A este siglo","A las tradiciones"],c:2},{q:"\u00bfC\u00f3mo nos transformamos?",opts:["Por obras","Por la oraci\u00f3n","Por la renovaci\u00f3n del entendimiento","Por la iglesia"],c:2}],kw:["No os conform\u00e9is","siglo","transform\u00e1os","renovaci\u00f3n","entendimiento","voluntad de Dios"]},
-  {ref:"Hebreos 11:1",text:"Es, pues, la fe la certeza de lo que se espera, la convicci\u00f3n de lo que no se ve.",questions:[{q:"\u00bfC\u00f3mo define la Biblia la fe?",opts:["Creer en Dios","La certeza de lo que se espera","Obedecer la ley","Ir a la iglesia"],c:1},{q:"\u00bfDe qu\u00e9 es convicci\u00f3n?",opts:["De lo pasado","De lo visible","De lo que no se ve","De las Escrituras"],c:2}],kw:["fe","certeza","se espera","convicci\u00f3n","no se ve"]},
-  {ref:"Apocalipsis 3:20",text:"He aqu\u00ed, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entrar\u00e9 a \u00e9l, y cenar\u00e9 con \u00e9l, y \u00e9l conmigo.",questions:[{q:"\u00bfQu\u00e9 hace Jes\u00fas?",opts:["Juzgando","Esperando","Llamando a la puerta","Preparando el reino"],c:2},{q:"\u00bfQu\u00e9 promete si le abren?",opts:["Dar\u00e1 riquezas","Entrar\u00e1 y cenar\u00e1 con \u00e9l","Le sanar\u00e1","Le dar\u00e1 paz"],c:1}],kw:["estoy a la puerta","llamo","oye mi voz","abre la puerta","entrar\u00e9","cenar\u00e9"]}
+{ref:"Juan 3:16",text:"Porque de tal manera am\u00f3 Dios al mundo, que ha dado a su Hijo unig\u00e9nito, para que todo aquel que en \u00e9l cree, no se pierda, mas tenga vida eterna.",questions:[{q:"\u00bfPor qu\u00e9 Dios dio a su Hijo?",opts:["Por sus obras","Porque am\u00f3 al mundo","Para juzgarlo","Por su fe"],c:1},{q:"\u00bfQu\u00e9 promete a quien cree?",opts:["Riqueza","Salud","No se pierda, tenga vida eterna","Sabidur\u00eda"],c:2}],kw:["am\u00f3","Hijo unig\u00e9nito","cree","no se pierda","vida eterna"]},
+{ref:"Salmo 23:1",text:"Jehov\u00e1 es mi pastor; nada me faltar\u00e1.",questions:[{q:"\u00bfQui\u00e9n es el pastor?",opts:["David","Mois\u00e9s","Jehov\u00e1","Un \u00e1ngel"],c:2},{q:"\u00bfQu\u00e9 afirma quien tiene a Jehov\u00e1?",opts:["Bendici\u00f3n","Nada le faltar\u00e1","Larga vida","Sabidur\u00eda"],c:1}],kw:["Jehov\u00e1","pastor","nada","faltar\u00e1"]},
+{ref:"Filipenses 4:13",text:"Todo lo puedo en Cristo que me fortalece.",questions:[{q:"\u00bfEn qui\u00e9n todo lo podemos?",opts:["En nosotros","En Cristo","En la fe","En la iglesia"],c:1},{q:"\u00bfQu\u00e9 hace Cristo?",opts:["Nos salva","Nos gu\u00eda","Nos fortalece","Nos llama"],c:2}],kw:["Todo","Cristo","fortalece"]},
+{ref:"Proverbios 3:5-6",text:"F\u00edате de Jehov\u00e1 de todo tu coraz\u00f3n, y no te apoyes en tu propia prudencia. Rec\u00f3nocele en todos tus caminos, y \u00e9l enderezar\u00e1 tus veredas.",questions:[{q:"\u00bfEn qu\u00e9 no debemos apoyarnos?",opts:["En los amigos","En nuestra prudencia","En las riquezas","En otros"],c:1},{q:"\u00bfQu\u00e9 har\u00e1 Dios?",opts:["Nos dar\u00e1 riquezas","Nos sanar\u00e1","Enderezar\u00e1 nuestras veredas","Nos dar\u00e1 paz"],c:2}],kw:["coraz\u00f3n","prudencia","caminos","enderezar\u00e1","veredas"]},
+{ref:"Josu\u00e9 1:9",text:"Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehov\u00e1 tu Dios estar\u00e1 contigo en dondequiera que fueres.",questions:[{q:"\u00bfQu\u00e9 manda Dios?",opts:["Que ores","Que te esfuerces y seas valiente","Que ayunes","Que estudies"],c:1},{q:"\u00bfCu\u00e1l es la promesa?",opts:["Bendici\u00f3n","Victoria","Jehov\u00e1 estar\u00e1 contigo dondequiera","Larga vida"],c:2}],kw:["esfuerces","valiente","no temas","no desmayes","dondequiera"]},
+{ref:"Romanos 8:28",text:"Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien, esto es, a los que conforme a su prop\u00f3sito son llamados.",questions:[{q:"\u00bfA qui\u00e9nes ayudan a bien?",opts:["A los ricos","A los que aman a Dios","A los religiosos","A los sabios"],c:1},{q:"\u00bfC\u00f3mo son llamados?",opts:["Los que ayunan","Conforme a su prop\u00f3sito","Los que oran","Los que dan"],c:1}],kw:["aman a Dios","todas las cosas","bien","prop\u00f3sito","llamados"]},
+{ref:"Isa\u00edas 41:10",text:"No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudar\u00e9, siempre te sustentar\u00e9 con la diestra de mi justicia.",questions:[{q:"\u00bfPor qu\u00e9 no debemos temer?",opts:["Porque somos fuertes","Porque Dios est\u00e1 con nosotros","Porque tenemos fe","Por la oraci\u00f3n"],c:1},{q:"\u00bfCon qu\u00e9 sustenta?",opts:["Con pan","Con \u00e1ngeles","Con la diestra de su justicia","Con su ley"],c:2}],kw:["No temas","estoy contigo","no desmayes","te ayudar\u00e9","te sustentar\u00e9","diestra"]},
+{ref:"Mateo 6:33",text:"Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os ser\u00e1n a\u00f1adidas.",questions:[{q:"\u00bfQu\u00e9 debemos buscar primero?",opts:["El \u00e9xito","El reino de Dios y su justicia","La sabidur\u00eda","La paz"],c:1},{q:"\u00bfQu\u00e9 promete?",opts:["Paz","Todas estas cosas os ser\u00e1n a\u00f1adidas","Salvaci\u00f3n","Sabidur\u00eda"],c:1}],kw:["buscad","primeramente","reino de Dios","justicia","a\u00f1adidas"]},
+{ref:"Jerem\u00edas 29:11",text:"Porque yo s\u00e9 los pensamientos que tengo acerca de vosotros, dice Jehov\u00e1, pensamientos de paz, y no de mal, para daros el fin que esper\u00e1is.",questions:[{q:"\u00bfC\u00f3mo son los pensamientos de Dios?",opts:["De juicio","De paz y no de mal","De prueba","De correcci\u00f3n"],c:1},{q:"\u00bfPara qu\u00e9?",opts:["Para juzgarnos","Para probarnos","Para darnos el fin que esperamos","Para guiarnos"],c:2}],kw:["pensamientos","paz","no de mal","fin","esper\u00e1is"]},
+{ref:"Salmo 46:1",text:"Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones.",questions:[{q:"\u00bfQu\u00e9 es Dios?",opts:["Nuestro juez","Nuestro amparo y fortaleza","Nuestro maestro","Nuestro creador"],c:1},{q:"\u00bfCu\u00e1ndo es auxilio?",opts:["Siempre","En la prosperidad","En las tribulaciones","En la oraci\u00f3n"],c:2}],kw:["amparo","fortaleza","pronto auxilio","tribulaciones"]},
+{ref:"2 Corintios 5:17",text:"De modo que si alguno est\u00e1 en Cristo, nueva criatura es; las cosas viejas pasaron; he aqu\u00ed todas son hechas nuevas.",questions:[{q:"\u00bfQu\u00e9 es quien est\u00e1 en Cristo?",opts:["Salvo","Nueva criatura","Libre","Bendecido"],c:1},{q:"\u00bfQu\u00e9 pasa con las cosas viejas?",opts:["Se mejoran","Se olvidan","Pasaron","Se transforman"],c:2}],kw:["Cristo","nueva criatura","cosas viejas","pasaron","nuevas"]},
+{ref:"Salmo 119:105",text:"L\u00e1mpara es a mis pies tu palabra, y lumbrera a mi camino.",questions:[{q:"\u00bfA qu\u00e9 compara la Palabra?",opts:["A un arma","A una l\u00e1mpara y lumbrera","A un escudo","A una espada"],c:1},{q:"\u00bfQu\u00e9 ilumina?",opts:["El coraz\u00f3n","El futuro","Los pies y el camino","La mente"],c:2}],kw:["L\u00e1mpara","pies","palabra","lumbrera","camino"]},
+{ref:"Juan 14:6",text:"Jes\u00fas le dijo: Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por m\u00ed.",questions:[{q:"\u00bfQu\u00e9 afirma Jes\u00fas?",opts:["Que es Rey","El camino, la verdad y la vida","El Mes\u00edas","El Salvador"],c:1},{q:"\u00bfC\u00f3mo se llega al Padre?",opts:["Por las obras","Por la oraci\u00f3n","S\u00f3lo por Jes\u00fas","Por los ap\u00f3stoles"],c:2}],kw:["camino","verdad","vida","nadie","Padre","por m\u00ed"]},
+{ref:"Efesios 2:8-9",text:"Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se glor\u00ede.",questions:[{q:"\u00bfPor qu\u00e9 medio?",opts:["Por obras","Por gracia mediante la fe","Por m\u00e9ritos","Por ritos"],c:1},{q:"\u00bfPor qu\u00e9 no por obras?",opts:["No importan","Para que nadie se glor\u00ede","No hay obras buenas","Dios no las acepta"],c:1}],kw:["gracia","salvos","fe","don de Dios","no por obras"]},
+{ref:"Romanos 10:9",text:"Que si confesares con tu boca que Jes\u00fas es el Se\u00f1or, y creyeres en tu coraz\u00f3n que Dios le levant\u00f3 de los muertos, ser\u00e1s salvo.",questions:[{q:"\u00bfQu\u00e9 debes confesar?",opts:["Tus pecados","Que Jes\u00fas es el Se\u00f1or","Tu fe","Tus obras"],c:1},{q:"\u00bfQu\u00e9 debes creer?",opts:["Que Dios existe","Que la Biblia es verdad","Que Dios levant\u00f3 a Jes\u00fas","Que Jes\u00fas vendr\u00e1"],c:2}],kw:["confesares","boca","Se\u00f1or","creyeres","coraz\u00f3n","levant\u00f3","salvo"]},
+{ref:"1 Juan 1:9",text:"Si confesamos nuestros pecados, \u00e9l es fiel y justo para perdonar nuestros pecados, y limpiarnos de toda maldad.",questions:[{q:"\u00bfQu\u00e9 debemos confesar?",opts:["Nuestra fe","Nuestros pecados","Nuestras oraciones","Nuestra debilidad"],c:1},{q:"\u00bfDe qu\u00e9 nos limpia?",opts:["Del dolor","De las enfermedades","De toda maldad","Del pecado original"],c:2}],kw:["confesamos","pecados","fiel","justo","perdonar","limpiarnos","maldad"]},
+{ref:"G\u00e1latas 2:20",text:"Con Cristo estoy juntamente crucificado, y ya no vivo yo, mas vive Cristo en m\u00ed; y lo que ahora vivo en la carne, lo vivo en la fe del Hijo de Dios, el cual me am\u00f3 y se entreg\u00f3 a s\u00ed mismo por m\u00ed.",questions:[{q:"\u00bfQui\u00e9n vive en el creyente?",opts:["El Esp\u00edritu","Cristo","Dios","Un \u00e1ngel"],c:1},{q:"\u00bfC\u00f3mo vive en la carne?",opts:["Por la ley","En la fe del Hijo de Dios","Por la oraci\u00f3n","Por la obediencia"],c:1}],kw:["crucificado","ya no vivo yo","vive Cristo en m\u00ed","fe","Hijo de Dios","me am\u00f3"]},
+{ref:"Romanos 12:2",text:"No os conform\u00e9is a este siglo, sino transform\u00e1os por medio de la renovaci\u00f3n de vuestro entendimiento, para que comprob\u00e9is cu\u00e1l sea la buena voluntad de Dios, agradable y perfecta.",questions:[{q:"\u00bfA qu\u00e9 no debemos conformarnos?",opts:["A la iglesia","A los l\u00edderes","A este siglo","A las tradiciones"],c:2},{q:"\u00bfC\u00f3mo nos transformamos?",opts:["Por obras","Por la oraci\u00f3n","Por la renovaci\u00f3n del entendimiento","Por la iglesia"],c:2}],kw:["No os conform\u00e9is","siglo","transform\u00e1os","renovaci\u00f3n","entendimiento","voluntad de Dios"]},
+{ref:"Hebreos 11:1",text:"Es, pues, la fe la certeza de lo que se espera, la convicci\u00f3n de lo que no se ve.",questions:[{q:"\u00bfC\u00f3mo define la Biblia la fe?",opts:["Creer en Dios","La certeza de lo que se espera","Obedecer la ley","Ir a la iglesia"],c:1},{q:"\u00bfDe qu\u00e9 es convicci\u00f3n?",opts:["De lo pasado","De lo visible","De lo que no se ve","De las Escrituras"],c:2}],kw:["fe","certeza","se espera","convicci\u00f3n","no se ve"]},
+{ref:"Apocalipsis 3:20",text:"He aqu\u00ed, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entrar\u00e9 a \u00e9l, y cenar\u00e9 con \u00e9l, y \u00e9l conmigo.",questions:[{q:"\u00bfQu\u00e9 hace Jes\u00fas?",opts:["Juzgando","Esperando","Llamando a la puerta","Preparando el reino"],c:2},{q:"\u00bfQu\u00e9 promete si le abren?",opts:["Dar\u00e1 riquezas","Entrar\u00e1 y cenar\u00e1 con \u00e9l","Le sanar\u00e1","Le dar\u00e1 paz"],c:1}],kw:["estoy a la puerta","llamo","oye mi voz","abre la puerta","entrar\u00e9","cenar\u00e9"]}
 ];
 
 var LESSONS=[
-  {id:'rep',name:'Repetici\u00f3n',sub:'Repite hasta memorizar',icon:'ti-refresh',cls:'li-green',xp:20},
-  {id:'frag',name:'Fragmentos',sub:'Bloque por bloque',icon:'ti-puzzle',cls:'li-blue',xp:15},
-  {id:'kw',name:'Palabras clave',sub:'Rellena los blancos',icon:'ti-key',cls:'li-purple',xp:15},
-  {id:'comp',name:'Comprensi\u00f3n',sub:'Preguntas del texto',icon:'ti-brain',cls:'li-yellow',xp:20},
-  {id:'write',name:'Escritura',sub:'Escribe de memoria',icon:'ti-pencil',cls:'li-red',xp:30,boss:true}
+{id:'rep',name:'Repetici\u00f3n',sub:'Repite hasta memorizar',icon:'ti-refresh',cls:'li-green',xp:20},
+{id:'frag',name:'Fragmentos',sub:'Bloque por bloque',icon:'ti-puzzle',cls:'li-blue',xp:15},
+{id:'kw',name:'Palabras clave',sub:'Rellena los blancos',icon:'ti-key',cls:'li-purple',xp:15},
+{id:'comp',name:'Comprensi\u00f3n',sub:'Preguntas del texto',icon:'ti-brain',cls:'li-yellow',xp:20},
+{id:'write',name:'Escritura',sub:'Escribe de memoria',icon:'ti-pencil',cls:'li-red',xp:30}
 ];
 
 var vIdx=0,rCnt=0,rGoal=10,hidden=false,frags=[],kws=[],custom=null,qIdx=0;
 var recInt=null,recSec=0,isLoop=false,loopCnt=0,playingRef=null;
 var xpToday=0,xpTotal=0,streak=0,totalAccuracy=[],completedLessons={};
 var currentPanel=null;
+var mediaRec=null,aChunks=[],aud=null,audioBlobs={};
 
 function getV(){return vIdx==='custom'?custom:VERSES[vIdx];}
 function getVKey(){return 'v'+(vIdx==='custom'?'c':vIdx);}
@@ -440,6 +366,7 @@ function loadState(){
     xpToday=0;xpTotal=0;streak=0;totalAccuracy=[];completedLessons={};
   }
 }
+
 function saveState(){
   try{
     localStorage.setItem('memoriza_state',JSON.stringify({
@@ -449,29 +376,18 @@ function saveState(){
     }));
   }catch(e){}
 }
-function addXP(amt){
-  xpToday+=amt;xpTotal+=amt;
-  updateXPBar();saveState();
-}
+
+function addXP(amt){xpToday+=amt;xpTotal+=amt;updateXPBar();saveState();}
 function updateXPBar(){
   var pct=Math.min(100,Math.round(xpToday/100*100));
   document.getElementById('xp-fill').style.width=pct+'%';
   document.getElementById('xp-label').textContent=xpToday+' / 100';
 }
 function updateHearts(){
-  var h=document.getElementById('hearts-display');
-  h.innerHTML='';
-  for(var i=0;i<5;i++){
-    var ic=document.createElement('i');
-    ic.className='ti ti-heart';
-    ic.style.fontSize='16px';
-    ic.style.color=i<3?'#E8212A':'#ddd';
-    h.appendChild(ic);
-  }
+  var h=document.getElementById('hearts-display');h.innerHTML='';
+  for(var i=0;i<5;i++){var ic=document.createElement('i');ic.className='ti ti-heart';ic.style.fontSize='16px';ic.style.color=i<3?'#E8212A':'#ddd';h.appendChild(ic);}
 }
-function updateStreak(){
-  document.getElementById('streak-num').textContent=streak;
-}
+function updateStreak(){document.getElementById('streak-num').textContent=streak;}
 
 function buildSel(){
   var s=document.getElementById('vsel');s.innerHTML='';
@@ -484,8 +400,7 @@ function selVerse(){
   vIdx=v==='custom'?'custom':parseInt(v);
   document.getElementById('vref').textContent=getV().ref;
   document.getElementById('vtxt').textContent=getV().text;
-  closePanel();
-  buildLessonsPath();
+  closePanel();buildLessonsPath();
   resetRep();buildFrags();buildKws();clearW();buildComp();
   updateRecorderForVerse();
 }
@@ -494,14 +409,13 @@ function buildLessonsPath(){
   var key=getVKey();
   var done=completedLessons[key]||[];
   var html='';
-  LESSONS.forEach(function(l,i){
+  LESSONS.forEach(function(l){
     var isDone=done.indexOf(l.id)>=0;
     var cls=isDone?'done':'active';
-    var badge=isDone?'<span class="lbadge lb-green">+'+l.xp+' XP \u2713</span>':
-              '<span class="lbadge lb-xp">+'+l.xp+' XP</span>';
-    if(l.boss&&!isDone)badge='<span class="lbadge lb-red">Final boss</span>';
+    var badge=isDone?'<span class="lbadge lb-green">+'+l.xp+' XP \u2713</span>':'<span class="lbadge lb-xp">+'+l.xp+' XP</span>';
+    if(l.id==='write'&&!isDone){badge='<span class="lbadge lb-red">Final boss</span>';}
     html+='<div class="lesson '+cls+'" onclick="openPanel(\''+l.id+'\')">'+
-      '<div class="lesson-icon '+l.cls+'"><i class="ti '+l.icon+'" aria-hidden="true" style="color:#fff;font-size:18px;"></i></div>'+
+      '<div class="lesson-icon '+l.cls+'"><i class="ti '+l.icon+'" style="color:#fff;font-size:18px;"></i></div>'+
       '<div class="lesson-info"><div class="lesson-name">'+l.name+'</div><div class="lesson-sub">'+l.sub+'</div></div>'+
       badge+'</div>';
   });
@@ -509,7 +423,7 @@ function buildLessonsPath(){
 }
 
 function openPanel(id){
-  if(currentPanel)document.getElementById('panel-'+currentPanel).classList.remove('active');
+  if(currentPanel){document.getElementById('panel-'+currentPanel).classList.remove('active');}
   currentPanel=id;
   document.getElementById('panel-'+id).classList.add('active');
   document.getElementById('panel-'+id).scrollIntoView({behavior:'smooth',block:'nearest'});
@@ -530,25 +444,25 @@ function showScreen(name){
   document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
   document.getElementById('screen-'+name).classList.add('active');
   document.getElementById('nav-'+name).classList.add('active');
-  if(name==='rec')refreshRecList();
-  if(name==='prog')updateProgScreen();
-  if(name==='verses')buildVersesList();
+  if(name==='rec'){refreshRecList();}
+  if(name==='verses'){buildVersesList();}
+  if(name==='prog'){updateProgScreen();}
 }
 
 function buildVersesList(){
-  var key=getVKey();
-  var html=VERSES.map(function(v,i){
+  var html='';
+  VERSES.forEach(function(v,i){
     var vk='v'+i;
-    var done=completedLessons[vk]||[];
-    var pct=Math.round(done.length/LESSONS.length*100);
+    var done=(completedLessons[vk]||[]).length;
+    var pct=Math.round(done/LESSONS.length*100);
     var color=pct===100?'#58CC02':pct>0?'#F6C012':'#ccc';
     var sel=i===vIdx?' selected':'';
-    return'<div class="vlist-item'+sel+'" onclick="selectVerseFromList('+i+')">'+
-      '<div class="vlist-icon" style="background:'+color+'"><i class="ti ti-book" aria-hidden="true" style="color:#fff;font-size:16px;"></i></div>'+
-      '<div style="flex:1"><div class="vlist-name">'+v.ref+'</div><div class="vlist-prog">'+done.length+'/'+LESSONS.length+' lecciones</div></div>'+
-      (pct===100?'<i class="ti ti-check" aria-hidden="true" style="color:#58CC02;font-size:18px;"></i>':'')+
+    html+='<div class="vlist-item'+sel+'" onclick="selectVerseFromList('+i+')">'+
+      '<div style="width:34px;height:34px;border-radius:10px;background:'+color+';display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-book" style="color:#fff;font-size:16px;"></i></div>'+
+      '<div style="flex:1"><div style="font-size:13px;font-weight:700;color:#222;">'+v.ref+'</div><div style="font-size:10px;color:#aaa;font-weight:600;">'+done+'/'+LESSONS.length+' lecciones</div></div>'+
+      (pct===100?'<i class="ti ti-check" style="color:#58CC02;font-size:18px;"></i>':'')+
     '</div>';
-  }).join('');
+  });
   document.getElementById('vlist-container').innerHTML=html;
 }
 
@@ -562,229 +476,323 @@ function selectVerseFromList(i){
 }
 
 function updateProgScreen(){
-  var totalDone=Object.keys(completedLessons).reduce(function(acc,k){
-    return acc+(completedLessons[k].length===LESSONS.length?1:0);},0);
+  var totalDone=Object.keys(completedLessons).reduce(function(acc,k){return acc+((completedLessons[k]||[]).length===LESSONS.length?1:0);},0);
   document.getElementById('stat-verses').textContent=totalDone;
   document.getElementById('stat-streak').textContent=streak;
   document.getElementById('stat-xp').textContent=xpTotal;
   var avgAcc=totalAccuracy.length?Math.round(totalAccuracy.reduce(function(a,b){return a+b;},0)/totalAccuracy.length):0;
   document.getElementById('stat-acc').textContent=avgAcc+'%';
-  var ach=[];
-  if(totalDone>=1)ach.push({icon:'ti-star',text:'Primer vers\u00edculo completado',color:'#F6C012'});
-  if(totalDone>=5)ach.push({icon:'ti-award',text:'5 vers\u00edculos dominados',color:'#58CC02'});
-  if(streak>=7)ach.push({icon:'ti-flame',text:'Racha de 7 d\u00edas',color:'#E8212A'});
-  if(xpTotal>=500)ach.push({icon:'ti-bolt',text:'500 XP acumulados',color:'#1CB0F6'});
-  var el=document.getElementById('achievements');
-  if(!ach.length){el.innerHTML='<div style="font-size:13px;color:#aaa;text-align:center;padding:1rem;">Completa lecciones para desbloquear logros</div>';return;}
-  el.innerHTML=ach.map(function(a){
-    return'<div style="display:flex;align-items:center;gap:.75rem;padding:.5rem 0;border-bottom:2px solid #f0f0f0;">'+
-      '<div style="width:34px;height:34px;border-radius:10px;background:'+a.color+';display:flex;align-items:center;justify-content:center;">'+
-        '<i class="ti '+a.icon+'" aria-hidden="true" style="color:#fff;font-size:17px;"></i></div>'+
-      '<div style="font-size:13px;font-weight:700;color:#222;">'+a.text+'</div></div>';
-  }).join('');
 }
 
-function resetRep(){rCnt=0;hidden=false;document.getElementById('repok').style.display='none';document.getElementById('rvbox').textContent=getV().text;document.getElementById('btnhide').innerHTML='<i class="ti ti-eye-off"></i> Ocultar';updateRepUI();}
-function updateRepUI(){document.getElementById('rctr').innerHTML=rCnt+' <span>/ '+rGoal+'</span>';document.getElementById('rpbar').style.width=Math.min(100,rCnt/rGoal*100)+'%';}
+function resetRep(){
+  rCnt=0;hidden=false;
+  document.getElementById('repok').style.display='none';
+  document.getElementById('rvbox').textContent=getV().text;
+  document.getElementById('btnhide').innerHTML='<i class="ti ti-eye-off"></i> Ocultar';
+  updateRepUI();
+}
+function updateRepUI(){
+  document.getElementById('rctr').innerHTML=rCnt+' <span>/ '+rGoal+'</span>';
+  document.getElementById('rpbar').style.width=Math.min(100,rCnt/rGoal*100)+'%';
+}
 function doRep(){
-  if(rCnt<rGoal)rCnt++;updateRepUI();
+  if(rCnt<rGoal){rCnt++;}
+  updateRepUI();
   if(rCnt>=rGoal){
     document.getElementById('repok').style.display='block';
     document.getElementById('repokn').textContent=rGoal;
     markLessonDone('rep',20);
-    streak=Math.max(streak,1);updateStreak();saveState();
+    if(streak<1){streak=1;updateStreak();saveState();}
   }
 }
-function toggleHide(){hidden=!hidden;var el=document.getElementById('rvbox'),btn=document.getElementById('btnhide');if(hidden){el.textContent='';el.style.minHeight='50px';btn.innerHTML='<i class="ti ti-eye"></i> Mostrar';}else{el.textContent=getV().text;btn.innerHTML='<i class="ti ti-eye-off"></i> Ocultar';}}
+function toggleHide(){
+  hidden=!hidden;
+  var el=document.getElementById('rvbox');
+  var btn=document.getElementById('btnhide');
+  if(hidden){el.textContent='';el.style.minHeight='50px';btn.innerHTML='<i class="ti ti-eye"></i> Mostrar';}
+  else{el.textContent=getV().text;btn.innerHTML='<i class="ti ti-eye-off"></i> Ocultar';}
+}
 
 function buildComp(){qIdx=0;showQ();}
 function showQ(){
   var v=getV(),qs=v.questions||[],c=document.getElementById('compct');
   if(!qs.length){c.innerHTML='<p style="color:#aaa;font-size:14px;">Sin preguntas.</p>';return;}
   if(qIdx>=qs.length){
-    c.innerHTML='<div style="text-align:center;padding:1.25rem;"><div style="font-size:32px;">&#127881;</div><p style="font-weight:700;font-size:15px;margin-top:.5rem;">\u00a1Respondiste todo!</p><button class="btnp" style="margin:.75rem auto 0;display:flex;" onclick="buildComp()"><i class="ti ti-refresh"></i> Repetir</button></div>';
-    markLessonDone('comp',20);return;
+    c.innerHTML='<div style="text-align:center;padding:1.25rem;"><div style="font-size:32px;">\u2605</div><p style="font-weight:700;font-size:15px;margin-top:.5rem;">\u00a1Respondiste todo!</p><button class="btnp" style="margin:.75rem auto 0;display:flex;" onclick="buildComp()"><i class="ti ti-refresh"></i> Repetir</button></div>';
+    markLessonDone('comp',20);
+    return;
   }
   var q=qs[qIdx];
   var h='<div style="font-size:11px;color:#aaa;font-weight:700;margin-bottom:.5rem;">PREGUNTA '+(qIdx+1)+' DE '+qs.length+'</div><div class="cq">'+q.q+'</div><div class="copts">';
   q.opts.forEach(function(o,i){h+='<div class="copt" id="co-'+i+'" onclick="checkQ('+i+','+q.c+')">'+o+'</div>';});
-  h+='</div><div class="cfb" id="cfb"></div>';c.innerHTML=h;
+  h+='</div><div class="cfb" id="cfb"></div>';
+  c.innerHTML=h;
 }
 function checkQ(ch,co){
   document.querySelectorAll('.copt').forEach(function(o){o.style.pointerEvents='none';});
   var fb=document.getElementById('cfb');
-  if(ch===co){document.getElementById('co-'+ch).classList.add('correct');fb.className='cfb ok';fb.innerHTML='\u2713 \u00a1Correcto! <button class="btns" style="margin-top:6px;" onclick="qIdx++;showQ()">Siguiente \u2192</button>';}
-  else{document.getElementById('co-'+ch).classList.add('wrong');document.getElementById('co-'+co).classList.add('correct');fb.className='cfb no';fb.innerHTML='\u2717 Incorrecto. <button class="btns" style="margin-top:6px;" onclick="qIdx++;showQ()">Continuar</button>';}
+  if(ch===co){
+    document.getElementById('co-'+ch).classList.add('correct');
+    fb.className='cfb ok';
+    fb.innerHTML='\u2713 \u00a1Correcto! <button class="btns" style="margin-top:6px;" onclick="qIdx++;showQ()">Siguiente \u2192</button>';
+  }else{
+    document.getElementById('co-'+ch).classList.add('wrong');
+    document.getElementById('co-'+co).classList.add('correct');
+    fb.className='cfb no';
+    fb.innerHTML='\u2717 Incorrecto. <button class="btns" style="margin-top:6px;" onclick="qIdx++;showQ()">Continuar</button>';
+  }
 }
 
 function buildFrags(){
-  var words=getV().text.split(' '),sz=Math.max(2,Math.floor(words.length/6));
-  frags=[];for(var i=0;i<words.length;i+=sz)frags.push({w:words.slice(i,i+sz).join(' '),shown:false});renderFrags();
+  var words=getV().text.split(' ');
+  var sz=Math.max(2,Math.floor(words.length/6));
+  frags=[];
+  for(var i=0;i<words.length;i+=sz){frags.push({w:words.slice(i,i+sz).join(' '),shown:false});}
+  renderFrags();
 }
 function renderFrags(){
-  document.getElementById('fragct').innerHTML=frags.map(function(f,i){
+  var html='';
+  frags.forEach(function(f,i){
     var label=f.shown?f.w:f.w.split(' ').map(function(){return'_';}).join(' ');
-    return'<div class="frag '+(f.shown?'':'hid')+'" onclick="revF('+i+')">'+label+'</div>';
-  }).join('');
+    html+='<div class="frag '+(f.shown?'':'hid')+'" onclick="revF('+i+')">'+label+'</div>';
+  });
+  document.getElementById('fragct').innerHTML=html;
   var allDone=frags.length&&frags.every(function(f){return f.shown;});
   document.getElementById('fragok').style.display=allDone?'block':'none';
-  if(allDone)markLessonDone('frag',15);
+  if(allDone){markLessonDone('frag',15);}
 }
 function revF(i){frags[i].shown=true;renderFrags();}
 function revAllF(){frags.forEach(function(f){f.shown=true;});renderFrags();}
 function resetF(){frags.forEach(function(f){f.shown=false;});renderFrags();}
 
-function buildKws(){kws=(getV().kw||[]).map(function(k){return{w:k,shown:false};});renderKws();}
+function buildKws(){
+  kws=(getV().kw||[]).map(function(k){return{w:k,shown:false};});
+  renderKws();
+}
 function renderKws(){
   var txt=getV().text;
-  kws.forEach(function(kw,i){var re=new RegExp(kw.w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');txt=txt.replace(re,function(m){return kw.shown?'<span class="kwb sh" onclick="togKw('+i+')">'+m+'</span>':'<span class="kwb" onclick="togKw('+i+')">'+'_'.repeat(m.length)+'</span>';});});
+  kws.forEach(function(kw,i){
+    var re=new RegExp(kw.w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
+    txt=txt.replace(re,function(m){
+      return kw.shown?'<span class="kwb sh" onclick="togKw('+i+')">'+m+'</span>':'<span class="kwb" onclick="togKw('+i+')">'+'_'.repeat(m.length)+'</span>';
+    });
+  });
   document.getElementById('kwct').innerHTML=txt;
   var h=kws.filter(function(k){return!k.shown;}).length;
   document.getElementById('kwlbl').textContent=h>0?h+' palabra'+(h>1?'s':'')+' oculta'+(h>1?'s':'')+'. Toca para revelar.':'\u00a1Todas reveladas!';
-  if(h===0&&kws.length>0)markLessonDone('kw',15);
+  if(h===0&&kws.length>0){markLessonDone('kw',15);}
 }
 function togKw(i){kws[i].shown=!kws[i].shown;renderKws();}
 function revAllKw(){kws.forEach(function(k){k.shown=true;});renderKws();}
 function resetKw(){kws.forEach(function(k){k.shown=false;});renderKws();}
 
 function checkW(){
-  var inp=document.getElementById('warea').value.trim(),orig=getV().text;
-  if(!inp)return;
+  var inp=document.getElementById('warea').value.trim();
+  var orig=getV().text;
+  if(!inp){return;}
   var iw=inp.replace(/[.,;:!\u00bf\u00a1?]/g,'').toLowerCase().split(/\s+/);
   var ow=orig.replace(/[.,;:!\u00bf\u00a1?]/g,'').toLowerCase().split(/\s+/);
   var ok=0,err=0,mis=0,h='';
-  ow.forEach(function(w,i){if(i<iw.length){if(iw[i]===w){h+='<span class="wok">'+w+' </span>';ok++;}else{h+='<span class="werr" title="Escribiste: '+iw[i]+'">'+w+' </span>';err++;}}else{h+='<span class="wmis">'+w+' </span>';mis++;}});
+  ow.forEach(function(w,i){
+    if(i<iw.length){
+      if(iw[i]===w){h+='<span class="wok">'+w+' </span>';ok++;}
+      else{h+='<span class="werr" title="Escribiste: '+iw[i]+'">'+w+' </span>';err++;}
+    }else{h+='<span class="wmis">'+w+' </span>';mis++;}
+  });
   var pct=Math.round(ok/ow.length*100);
   totalAccuracy.push(pct);
   document.getElementById('wres').innerHTML=h+'<div class="srow"><span class="chip chipg">\u2713 '+ok+'</span><span class="chip chipr">\u2717 '+err+'</span><span class="chip chipy">\u25cc '+mis+'</span><span style="font-size:14px;font-weight:700;color:'+(pct>=80?'#46A302':pct>=50?'#e6a800':'#c0392b')+';">'+pct+'%</span></div>';
-  if(pct>=70)markLessonDone('write',30);
+  if(pct>=70){markLessonDone('write',30);}
   saveState();
 }
 function clearW(){document.getElementById('warea').value='';document.getElementById('wres').innerHTML='';}
 
-function buildWave(){var w=document.getElementById('wave');w.innerHTML='';for(var i=0;i<32;i++){var b=document.createElement('div');b.className='wb2';b.style.setProperty('--h',(Math.random()*20+7)+'px');w.appendChild(b);}}
-function animW(on){document.querySelectorAll('.wb2').forEach(function(b){if(on)b.classList.add('an');else{b.classList.remove('an');b.style.height='4px';}});}
-function onMicPermissionGranted(){document.getElementById('rstat').textContent='Listo para grabar';}
-function onNativePlaybackComplete(){
-  if(playingRef){var key=playingRef.replace(/[^a-zA-Z0-9]/g,'_');var icon=document.getElementById('pli-'+key);if(icon)icon.className='ti ti-player-play';playingRef=null;}
-  if(isLoop&&document.getElementById('pbadge').classList.contains('show')){loopCnt++;document.getElementById('lcnt').textContent=loopCnt;if(aud){aud.currentTime=0;aud.play();}}
-  else{document.getElementById('btplay').innerHTML='<i class="ti ti-player-play"></i>';document.getElementById('pbadge').classList.remove('show');animW(false);}
+function buildWave(){
+  var w=document.getElementById('wave');w.innerHTML='';
+  for(var i=0;i<32;i++){var b=document.createElement('div');b.className='wb2';b.style.setProperty('--h',(Math.random()*20+7)+'px');w.appendChild(b);}
 }
+function animW(on){
+  document.querySelectorAll('.wb2').forEach(function(b){
+    if(on){b.classList.add('an');}else{b.classList.remove('an');b.style.height='4px';}
+  });
+}
+
+function onNativePlaybackComplete(){
+  if(playingRef){
+    var key=playingRef.replace(/[^a-zA-Z0-9]/g,'_');
+    var icon=document.getElementById('pli-'+key);
+    if(icon){icon.className='ti ti-player-play';}
+    playingRef=null;
+  }
+  if(isLoop&&document.getElementById('pbadge').classList.contains('show')){
+    loopCnt++;
+    document.getElementById('lcnt').textContent=loopCnt;
+    if(aud){aud.currentTime=0;aud.play();}
+  }else{
+    document.getElementById('btplay').innerHTML='<i class="ti ti-player-play"></i>';
+    document.getElementById('pbadge').classList.remove('show');
+    animW(false);
+  }
+}
+
 function updateRecorderForVerse(){
   var ref=getV().ref;
   var pb=document.getElementById('btplay');
-  if(audioBlobs&&audioBlobs[ref]){pb.className='rbtn ply';pb.disabled=false;document.getElementById('rstat').textContent='Grabaci\u00f3n: '+ref;}
-  else{pb.className='rbtn dis';pb.disabled=true;document.getElementById('rstat').textContent='Listo para grabar';}
+  if(audioBlobs[ref]){
+    pb.className='rbtn ply';pb.disabled=false;
+    document.getElementById('rstat').textContent='Grabaci\u00f3n: '+ref;
+  }else{
+    pb.className='rbtn dis';pb.disabled=true;
+    document.getElementById('rstat').textContent='Listo para grabar';
+  }
   document.getElementById('rtim').textContent='0:00';
 }
-var mediaRec=null,aChunks=[],aud=null,audioBlobs={};
+
 function toggleRec(){
   var ref=getV().ref;
   if(!mediaRec||mediaRec.state==='inactive'){
     navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
-      aChunks=[];mediaRec=new MediaRecorder(stream);
-      mediaRec.ondataavailable=function(e){if(e.data.size>0)aChunks.push(e.data);};
+      aChunks=[];
+      mediaRec=new MediaRecorder(stream);
+      mediaRec.ondataavailable=function(e){if(e.data.size>0){aChunks.push(e.data);}};
       mediaRec.onstop=function(){
-        var blob=new Blob(aChunks,{type:'audio/webm'});audioBlobs[ref]=blob;
+        var blob=new Blob(aChunks,{type:'audio/webm'});
+        audioBlobs[ref]=blob;
         aud=new Audio(URL.createObjectURL(blob));
         aud.onended=function(){onNativePlaybackComplete();};
         var pb=document.getElementById('btplay');pb.className='rbtn ply';pb.disabled=false;
         document.getElementById('rstat').textContent='Grabaci\u00f3n: '+ref;
         document.getElementById('rstat').classList.remove('live');
-        animW(false);document.getElementById('btrec').innerHTML='<i class="ti ti-microphone"></i>';
+        animW(false);
+        document.getElementById('btrec').innerHTML='<i class="ti ti-microphone"></i>';
         refreshRecList();
       };
-      mediaRec.start();recSec=0;
+      mediaRec.start();
+      recSec=0;
       recInt=setInterval(function(){recSec++;var m=Math.floor(recSec/60),s=recSec%60;document.getElementById('rtim').textContent=m+':'+String(s).padStart(2,'0');},1000);
       document.getElementById('btrec').innerHTML='<i class="ti ti-player-stop"></i>';
       document.getElementById('rstat').textContent='Grabando: '+ref;
-      document.getElementById('rstat').classList.add('live');animW(true);
+      document.getElementById('rstat').classList.add('live');
+      animW(true);
     }).catch(function(){document.getElementById('rstat').textContent='Permiso denegado.';});
   }else{
-    mediaRec.stop();mediaRec.stream.getTracks().forEach(function(t){t.stop();});
+    mediaRec.stop();
+    mediaRec.stream.getTracks().forEach(function(t){t.stop();});
     clearInterval(recInt);
   }
 }
+
 function doPlay(){
-  var ref=getV().ref;if(!audioBlobs[ref])return;
+  var ref=getV().ref;
+  if(!audioBlobs[ref]){return;}
   if(!aud||aud.paused){
     aud=new Audio(URL.createObjectURL(audioBlobs[ref]));
     aud.onended=function(){onNativePlaybackComplete();};
     loopCnt=0;document.getElementById('lcnt').textContent=0;
     aud.currentTime=0;aud.play();
     document.getElementById('btplay').innerHTML='<i class="ti ti-player-pause"></i>';
-    animW(true);if(isLoop)document.getElementById('pbadge').classList.add('show');
+    animW(true);
+    if(isLoop){document.getElementById('pbadge').classList.add('show');}
   }else{
-    aud.pause();document.getElementById('btplay').innerHTML='<i class="ti ti-player-play"></i>';
-    animW(false);document.getElementById('pbadge').classList.remove('show');
+    aud.pause();
+    document.getElementById('btplay').innerHTML='<i class="ti ti-player-play"></i>';
+    animW(false);
+    document.getElementById('pbadge').classList.remove('show');
   }
 }
-function toggleLoop(){isLoop=!isLoop;var t=document.getElementById('ltog');if(isLoop)t.classList.add('on');else{t.classList.remove('on');document.getElementById('pbadge').classList.remove('show');}}
+
+function toggleLoop(){
+  isLoop=!isLoop;
+  var t=document.getElementById('ltog');
+  if(isLoop){t.classList.add('on');}
+  else{t.classList.remove('on');document.getElementById('pbadge').classList.remove('show');}
+}
+
 function refreshRecList(){
-  var refs=Object.keys(audioBlobs||{);
+  var refs=Object.keys(audioBlobs);
   var el=document.getElementById('reclist');
   if(!refs.length){el.innerHTML='<div class="recempty">No hay grabaciones guardadas.</div>';return;}
-  el.innerHTML=refs.map(function(ref){var key=ref.replace(/[^a-zA-Z0-9]/g,'_');return'<div class="recitem"><div class="recitem-ref">'+ref+'</div><button class="recitem-btn recitem-play" onclick="playListItem(\''+ref.replace(/'/g,"\\'")+'\')" ><i class="ti ti-player-play" id="pli-'+key+'"></i></button><button class="recitem-btn recitem-del" onclick="deleteListItem(\''+ref.replace(/'/g,"\\'")+'\')" ><i class="ti ti-trash"></i></button></div>';}).join('');
-}
-function playListItem(ref){
-  try{
-    if(playingRef&&playingRef!==ref){
-      if(aud)aud.pause();
-      var ok=playingRef.replace(/[^a-zA-Z0-9]/g,'_');
-      var oi=document.getElementById('pli-'+ok);
-      if(oi)oi.className='ti ti-player-play';
-      playingRef=null;
-    }
+  var html='';
+  refs.forEach(function(ref){
     var key=ref.replace(/[^a-zA-Z0-9]/g,'_');
-    var icon=document.getElementById('pli-'+key);
-    if(aud&&!aud.paused&&playingRef===ref){
-      aud.pause();
-      if(icon)icon.className='ti ti-player-play';
-      playingRef=null;
-    }else if(audioBlobs[ref]){
-      aud=new Audio(URL.createObjectURL(audioBlobs[ref]));
-      aud.onended=function(){onNativePlaybackComplete();};
-      aud.play();
-      if(icon)icon.className='ti ti-player-pause';
-      playingRef=ref;
-    }
-  }catch(e){}
-}catch(e){}}
-function deleteListItem(ref){
-  try{
-    if(playingRef===ref){if(aud)aud.pause();playingRef=null;}
-    delete audioBlobs[ref];
-    refreshRecList();
-  }catch(e){}
-}delete audioBlobs[ref];refreshRecList();}catch(e){}}
+    html+='<div class="recitem">';
+    html+='<div class="recitem-ref">'+ref+'</div>';
+    html+='<button class="recitem-btn recitem-play" id="pb-'+key+'" onclick="playListItem(\''+key+'\')"><i class="ti ti-player-play" id="pli-'+key+'"></i></button>';
+    html+='<button class="recitem-btn recitem-del" onclick="deleteListItem(\''+key+'\')"><i class="ti ti-trash"></i></button>';
+    html+='</div>';
+  });
+  el.innerHTML=html;
+  window._recKeys={};
+  refs.forEach(function(ref){window._recKeys[ref.replace(/[^a-zA-Z0-9]/g,'_')]=ref;});
+}
+
+function playListItem(key){
+  var ref=window._recKeys&&window._recKeys[key]?window._recKeys[key]:key;
+  if(!audioBlobs[ref]){return;}
+  if(playingRef&&playingRef!==ref){
+    if(aud){aud.pause();}
+    var oldKey=playingRef.replace(/[^a-zA-Z0-9]/g,'_');
+    var oi=document.getElementById('pli-'+oldKey);
+    if(oi){oi.className='ti ti-player-play';}
+    playingRef=null;
+  }
+  var icon=document.getElementById('pli-'+key);
+  if(aud&&!aud.paused&&playingRef===ref){
+    aud.pause();
+    if(icon){icon.className='ti ti-player-play';}
+    playingRef=null;
+  }else{
+    aud=new Audio(URL.createObjectURL(audioBlobs[ref]));
+    aud.onended=function(){onNativePlaybackComplete();};
+    aud.play();
+    if(icon){icon.className='ti ti-player-pause';}
+    playingRef=ref;
+  }
+}
+
+function deleteListItem(key){
+  var ref=window._recKeys&&window._recKeys[key]?window._recKeys[key]:key;
+  if(playingRef===ref){if(aud){aud.pause();}playingRef=null;}
+  delete audioBlobs[ref];
+  refreshRecList();
+}
+
 function openModal(){document.getElementById('mwrap').classList.add('open');}
 function closeModal(){document.getElementById('mwrap').classList.remove('open');}
-function saveCustom(){var r=document.getElementById('mref').value.trim(),t=document.getElementById('mtxt').value.trim();if(!r||!t)return;custom={ref:r,text:t,questions:[],kw:t.split(' ').filter(function(_,i){return i%4===1;}).slice(0,6)};buildSel();document.getElementById('vsel').value='custom';vIdx='custom';document.getElementById('vref').textContent=custom.ref;document.getElementById('vtxt').textContent=custom.text;closePanel();buildLessonsPath();resetRep();buildFrags();buildKws();clearW();buildComp();closeModal();}
-
-function showErr(msg){
-  var d=document.createElement('div');
-  d.style.cssText='background:#fde8e8;border:2px solid #E8212A;border-radius:10px;padding:12px;margin:1rem;font-size:13px;color:#c0392b;font-weight:700;';
-  d.textContent='Error: '+msg;
-  document.body.insertBefore(d,document.body.firstChild);
+function saveCustom(){
+  var r=document.getElementById('mref').value.trim();
+  var t=document.getElementById('mtxt').value.trim();
+  if(!r||!t){return;}
+  custom={ref:r,text:t,questions:[],kw:t.split(' ').filter(function(_,i){return i%4===1;}).slice(0,6)};
+  buildSel();
+  document.getElementById('vsel').value='custom';
+  vIdx='custom';
+  document.getElementById('vref').textContent=custom.ref;
+  document.getElementById('vtxt').textContent=custom.text;
+  closePanel();buildLessonsPath();resetRep();buildFrags();buildKws();clearW();buildComp();
+  closeModal();
 }
-try{loadState();}catch(e){showErr('loadState: '+e.message);}
-try{buildSel();}catch(e){showErr('buildSel: '+e.message);}
-try{buildWave();}catch(e){showErr('buildWave: '+e.message);}
-try{
-  document.getElementById('vref').textContent=VERSES[0].ref;
-  document.getElementById('vtxt').textContent=VERSES[0].text;
-}catch(e){showErr('verseDisplay: '+e.message);}
-try{updateXPBar();}catch(e){showErr('updateXPBar: '+e.message);}
-try{updateHearts();}catch(e){showErr('updateHearts: '+e.message);}
-try{updateStreak();}catch(e){showErr('updateStreak: '+e.message);}
-try{buildLessonsPath();}catch(e){showErr('buildLessonsPath: '+e.message);}
-try{resetRep();}catch(e){showErr('resetRep: '+e.message);}
-try{buildFrags();}catch(e){showErr('buildFrags: '+e.message);}
-try{buildKws();}catch(e){showErr('buildKws: '+e.message);}
-try{buildComp();}catch(e){showErr('buildComp: '+e.message);}
-try{updateRecorderForVerse();}catch(e){}
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+
+loadState();
+buildSel();
+buildWave();
+document.getElementById('vref').textContent=VERSES[0].ref;
+document.getElementById('vtxt').textContent=VERSES[0].text;
+updateXPBar();
+updateHearts();
+updateStreak();
+buildLessonsPath();
+resetRep();
+buildFrags();
+buildKws();
+buildComp();
+updateRecorderForVerse();
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
+}
 </script>
 </body>
 </html>
- 
